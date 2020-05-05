@@ -113,7 +113,10 @@ public class ChangeSlotWindowController implements Initializable {
             System.err.println("IOException caught.");
         }
         cancel();
-        Main.open();
+        if(obj.isOwnerWindow())
+            Main.open();
+        else
+            Main.openAsst();
         obj.closeWindow();
     }
 

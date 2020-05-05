@@ -9,13 +9,23 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 public class Main extends Application {
-    String title="Dr. Parul Doshi";
+
+    String title = "Assistant Doctor";
+    int userSignature = 1;
+    static int ctr = 0;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
+        setUserSignature(this.userSignature);
         VBox vBox = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
         primaryStage.setTitle(title);
         primaryStage.setScene(new Scene(vBox, 800, 500));
         primaryStage.show();
+        if(ctr==0)
+        {
+            ctr++;
+            open();
+        }
     }
 
     public void setTitle(String title)
@@ -23,17 +33,39 @@ public class Main extends Application {
         this.title=title;
     }
 
+    public void setUS(int US)
+    {
+        this.userSignature = US;
+    }
+
     public void setUserSignature(int userSignature)
     {
         MainWindowController.userSignature=userSignature;
     }
-    public static int ctr=0;
+
     public static void open()
     {
         try {
-            ctr++;
+            Stage stage = new Stage();
+            Main mom = new Main();
+            mom.setTitle("Dr. Parul Doshi");
+            mom.userSignature = 0;
+            mom.start(stage);
+        }
+        catch(Exception e)
+        {
+            System.err.println("An unknown Exception occurred:");
+            e.printStackTrace();
+        }
+    }
+
+    public static void openAsst()
+    {
+        try {
             Stage stage = new Stage();
             Main obj = new Main();
+            obj.setTitle("Assistant Doctor");
+            obj.userSignature = 1;
             obj.start(stage);
         }
         catch(Exception e)

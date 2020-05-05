@@ -77,7 +77,7 @@ public class ChangeAppointmentWindowController
         void save() {
             try {
                 Patient newPatient = new Patient(nameTextField.getText(), phoneTextField.getText());
-                RecordFile patientFile = new RecordFile(newPatient.getFileName());
+                PatientFile patientFile = new PatientFile(newPatient.getFileName());
                 Patient existingPatient =patientFile.readFile();
                 if(existingPatient !=null)
                 {
@@ -85,7 +85,7 @@ public class ChangeAppointmentWindowController
                 }
                 else
                 {
-                    RecordFile rf=new RecordFile(newPatient);
+                    PatientFile rf=new PatientFile(newPatient);
                 }
                 ScheduleFile newScheduleFile=new ScheduleFile(schedule);
                 Appointment newAppointment=row.getAppointment();
@@ -102,7 +102,10 @@ public class ChangeAppointmentWindowController
                 System.err.println("IOException caught.");
             }
             cancel();
-            Main.open();
+            if(obj.isOwnerWindow())
+                Main.open();
+            else
+                Main.openAsst();
             obj.closeWindow();
         }
 

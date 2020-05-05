@@ -21,22 +21,27 @@ public class MainWindowController implements Initializable {
 
     private String dir=System.getProperty("user.dir")+"\\Directories\\";
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        if(Main.ctr==0) {
-            Main.ctr++;
-            Main obj = new Main();
-            obj.setUserSignature(1);
-            obj.setTitle("Assistant Doctor");
-            try {
-                obj.start(new Stage());
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
+
+//        if(Main.ctr==0) {
+//            Main.ctr++;
+//            Main obj = new Main();
+//            obj.setUserSignature(1);
+//            obj.setTitle("Assistant Doctor");
+//            flag = true;
+//            try {
+//                obj.start(new Stage());
+//            }
+//            catch(Exception e)
+//            {
+//                e.printStackTrace();
+//            }
+//        }
+
         initializeLabWorkTable();
         initializePrescriptionTable();
         MyDate date=new MyDate();
@@ -224,8 +229,8 @@ public class MainWindowController implements Initializable {
             ObservableList<Patient> data=FXCollections.observableArrayList();
             for(File file: RecordFiles)
             {
-                RecordFile recordFile=new RecordFile(file.getName().split("\\.")[0]);
-                Patient rec=recordFile.readFile();
+                PatientFile patientFile =new PatientFile(file.getName().split("\\.")[0]);
+                Patient rec= patientFile.readFile();
                 data.add(rec);
             }
             PatientTable.setItems(data);
@@ -513,9 +518,18 @@ public class MainWindowController implements Initializable {
         {
             case "Dr. Parul Doshi": userSignature=0;
                 break;
-            case "Dr. Chaitali": userSignature=1;
+            case "Assistant Doctor": userSignature=1;
                 break;
         }
+    }
+
+    public boolean isOwnerWindow()
+    {
+        setUserSignature();
+        if(userSignature==0)
+            return true;
+        else
+            return false;
     }
 
     public int getUserSignature()

@@ -105,4 +105,9 @@ public class Slot
         double end = Slot.fromConvention(times[1]);
         return start + " - " + end;
     }
+
+    public String newFormat()
+    {
+        return Slot.format(this);
+    }
 }

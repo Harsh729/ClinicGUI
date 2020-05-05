@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane fx:id="baseAnchorPane" prefHeight="254.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ChangeAppointmentWindowController">
+    <opaqueInsets>
+        <Insets />
+    </opaqueInsets>
+    <children>
+        <SplitPane dividerPositions="0.8351648351648352" orientation="VERTICAL" prefHeight="275.0" prefWidth="400.0">
+            <items>
+                <AnchorPane fx:id="detailsPane" minHeight="0.0" minWidth="0.0" prefHeight="212.0" prefWidth="398.0">
+                    <children>
+                        <Label fx:id="headingLabel" layoutX="142.0" layoutY="14.0" text="Change Appointment" />
+                        <Label fx:id="nameLabel" layoutX="44.0" layoutY="53.0" text="Name:" />
+                        <Label fx:id="phoneLabel" layoutX="44.0" layoutY="84.0" text="Phone:" />
+                        <Label fx:id="descriptionLabel" layoutX="44.0" layoutY="120.0" text="Description:" />
+                        <TextField fx:id="nameTextField" layoutX="82.0" layoutY="49.0" prefHeight="25.0" prefWidth="192.0" />
+                        <TextField fx:id="phoneTextField" layoutX="89.0" layoutY="80.0" prefHeight="25.0" prefWidth="185.0" />
+                        <TextArea fx:id="descriptionTextArea" layoutX="109.0" layoutY="120.0" prefHeight="75.0" prefWidth="165.0" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="buttonPane" minHeight="0.0" minWidth="0.0" prefHeight="62.0" prefWidth="398.0">
+                    <children>
+                        <ButtonBar fx:id="buttonBar" layoutY="97.0" prefHeight="52.0" prefWidth="398.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+                            <buttons>
+                                <HBox fx:id="buttonBox" spacing="10.0">
+                                    <children>
+                                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+                                        <Button fx:id="acceptButton" mnemonicParsing="false" onAction="#save" text="OK" />
+                                    </children>
+                                    <padding>
+                                        <Insets left="5.0" right="5.0" top="5.0" />
+                                    </padding>
+                                </HBox>
+                            </buttons>
+                            <padding>
+                                <Insets left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </ButtonBar>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>

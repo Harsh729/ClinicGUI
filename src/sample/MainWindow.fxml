@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainWindowController">
+    <children>
+        <MenuBar fx:id="mainMenuBar" prefHeight="38.0" prefWidth="1280.0" styleClass="menu-head" VBox.vgrow="ALWAYS">
+            <menus>
+                <Menu id="head" fx:id="MenuBar_Menu_File" mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem fx:id="Menu_File_Close" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
+                        <MenuItem fx:id="Menu_File_CreateLabWork" mnemonicParsing="false" onAction="#createLabWork" text="Create LabWork" />
+                  <MenuItem fx:id="Menu_File_CreateSchedule" mnemonicParsing="false" onAction="#createSchedule" text="Create Schedule" />
+                  <MenuItem fx:id="Menu_File_CreateRecord" mnemonicParsing="false" onAction="#createRecord" text="Create Record(Patient)" />
+                        <MenuItem fx:id="Menu_File_CreatePrescription" mnemonicParsing="false" onAction="#createPrescription" text="Create Prescription" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <SplitPane dividerPositions="0.24610244988864144" VBox.vgrow="ALWAYS">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
+                    <children>
+                        <VBox prefHeight="201.0" prefWidth="218.0" styleClass="tab-button" AnchorPane.bottomAnchor="359.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <Button id="tab-button" fx:id="ScheduleTabButton" mnemonicParsing="false" onAction="#openScheduleTab" prefHeight="56.0" prefWidth="218.0" styleClass="tab-button-selected" text="Schedule" VBox.vgrow="ALWAYS">
+                                    <font>
+                                        <Font name="System Bold" size="23.0" />
+                                    </font>
+                                </Button>
+                                <Button id="tab-button" fx:id="LabWorkTabButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#openLabWorkTab" prefHeight="56.0" prefWidth="218.0" text="Lab Work">
+                                    <font>
+                                        <Font name="System Bold" size="23.0" />
+                                    </font>
+                                </Button>
+                                <Button id="tab-button" fx:id="PrescriptionsTabButton" layoutX="10.0" layoutY="66.0" mnemonicParsing="false" onAction="#openPrescriptionsTab" prefHeight="56.0" prefWidth="218.0" text="Prescriptions">
+                                    <font>
+                                        <Font name="System Bold" size="23.0" />
+                                    </font>
+                                </Button>
+                        <Button id="tab-button" fx:id="PatientTabButton" mnemonicParsing="false" onAction="#openPatientTab" prefHeight="56.0" prefWidth="218.0" text="Patients">
+                           <font>
+                              <Font name="System Bold" size="23.0" />
+                           </font>
+                        </Button>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <AnchorPane fx:id="PrescriptionsTabAnchorPane" prefHeight="560.0" prefWidth="659.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <SplitPane dividerPositions="0.8978494623655914" orientation="VERTICAL" prefHeight="560.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                            <children>
+                                                <TableView fx:id="PrescriptionsTable" onMouseClicked="#testResponse" prefHeight="498.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                            </children></AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                  <AnchorPane fx:id="PatientAnchorPane" prefHeight="562.0" prefWidth="674.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TableView fx:id="PatientTable" prefHeight="560.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                        <AnchorPane fx:id="LabWorkAnchorPane" layoutY="-2.0" prefHeight="562.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+                            <children>
+                                <TableView fx:id="LabWorkTable" prefHeight="560.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="ScheduleAnchorPane" layoutX="2.0" prefHeight="560.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <SplitPane dividerPositions="0.8942652329749103" orientation="VERTICAL" prefHeight="560.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <items>
+                                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                            <children>
+                                                <TableView fx:id="ScheduleTable" editable="true" prefHeight="516.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                            </children>
+                                        </AnchorPane>
+                                        <AnchorPane maxHeight="63.0" prefHeight="105.0" prefWidth="670.0" SplitPane.resizableWithParent="false">
+                                            <children>
+                                                <HBox alignment="CENTER_RIGHT" prefHeight="63.0" prefWidth="672.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0">
+                                                    <children>
+                                                        <DatePicker fx:id="ScheduleDatePicker" onAction="#setScheduleDate" />
+                                          <Button fx:id="ScheduleTableAddButton" mnemonicParsing="false" onAction="#openScheduleAddWindow" prefHeight="42.0" prefWidth="85.0" text="Add">
+                                             <font>
+                                                <Font name="System Bold" size="21.0" />
+                                             </font>
+                                          </Button>
+                                                    </children>
+                                                    <padding>
+                                                        <Insets right="10.0" top="5.0" />
+                                                    </padding>
+                                                </HBox>
+                                            </children>
+                                            <opaqueInsets>
+                                                <Insets />
+                                            </opaqueInsets>
+                                        </AnchorPane>
+                                    </items>
+                                </SplitPane>
+                        <AnchorPane layoutX="498.0" layoutY="280.0" prefHeight="216.0" prefWidth="174.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="498.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="280.0">
+                           <children>
+                              <VBox alignment="CENTER" fillWidth="false" layoutX="498.0" layoutY="295.0" prefHeight="194.0" prefWidth="174.0" spacing="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="0.0">
+                                 <children>
+                                    <Button fx:id="PayButton" mnemonicParsing="false" onAction="#openPayWindow" prefHeight="37.0" prefWidth="136.0" text="Pay">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Button mnemonicParsing="false" onAction="#deleteScheduleEntry" prefHeight="37.0" prefWidth="135.0" text="Delete">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="ChangeSlotButton" mnemonicParsing="false" onAction="#openChangeSlotWindow" prefHeight="37.0" prefWidth="135.0" text="Change Slot">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="ChangeAppointmentButton" mnemonicParsing="false" onAction="#openChangeAppointmentWindow" prefHeight="44.0" prefWidth="144.0" text="Change Appointment">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</VBox>

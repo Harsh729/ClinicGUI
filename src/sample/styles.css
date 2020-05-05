@@ -1,0 +1,22 @@
+.menu-head {
+  -fx-font-size: 1.5em;
+}
+
+.table-head {
+  -fx-font-size: 1em;
+  -fx-font-weight: bold;
+}
+
+.tab-button {
+  -fx-font-size: 2em;
+  -fx-font-weight: bold;
+}
+
+.edit-button {
+  -fx-font-size: 1.5em;
+  -fx-font-weight: bold;
+}
+
+.tab-button-selected {
+    -fx-background-color: lightgrey;
+}

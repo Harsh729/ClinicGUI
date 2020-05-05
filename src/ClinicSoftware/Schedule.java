@@ -80,7 +80,7 @@ public class Schedule
 
     public void addBreak()
     {
-        Record b=new Record("Break","");
+        Patient b=new Patient("Break","");
         Appointment Break=new Appointment(b,"",null);
         add(Break);
     }

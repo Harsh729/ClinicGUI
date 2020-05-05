@@ -1,7 +1,7 @@
 package ClinicSoftware;
 
 public class Appointment {
-    Record patient;
+    Patient patient;
     String date;
     String procedure;
     double price;
@@ -11,7 +11,7 @@ public class Appointment {
     Prescription prescription;
     int userSignature;
 
-    public Appointment(Record patient, String date, String procedure, double price, Slot time,int userSignature) {
+    public Appointment(Patient patient, String date, String procedure, double price, Slot time, int userSignature) {
         this.patient = patient;
         this.date = date;
         this.procedure = procedure;
@@ -28,7 +28,7 @@ public class Appointment {
     }
 
     public Appointment() {
-        this(Record.defaultRecord(), "", "", 0,null,0);
+        this(Patient.defaultRecord(), "", "", 0,null,0);
     }
 
     public void setUserSignature(int userSignature) {
@@ -39,11 +39,11 @@ public class Appointment {
         return userSignature;
     }
 
-    public Appointment(Record patient, String date, Slot t1) {
+    public Appointment(Patient patient, String date, Slot t1) {
         this(patient, date, "", 0,t1,0);
     }
 
-    public Record getRecord() {
+    public Patient getRecord() {
         return patient;
     }
 
@@ -78,7 +78,7 @@ public class Appointment {
 
     public String getFileName(){return patient.getName()+" "+patient.getPhone()+" "+getDate();}
 
-    public void setPatient(Record patient)
+    public void setPatient(Patient patient)
     {
         this.patient=patient;
     }

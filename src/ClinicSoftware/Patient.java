@@ -2,7 +2,7 @@ package ClinicSoftware;
 
 import java.io.FileNotFoundException;
 
-public class Record
+public class Patient
 {
     private String name;
     private String phone;
@@ -22,7 +22,7 @@ public class Record
     private Appointment latestAppointment;
     private boolean appointmentsBuiltFlag=false;
 
-    public Record(String name, String phone, String firstAppointmentFile,int age, String description, String latestAppointmentFile, boolean heart_condition, boolean allergy,boolean blood_pressure,boolean diabetes)
+    public Patient(String name, String phone, String firstAppointmentFile, int age, String description, String latestAppointmentFile, boolean heart_condition, boolean allergy, boolean blood_pressure, boolean diabetes)
     {
         this.name=name;
         this.phone=phone;
@@ -38,12 +38,12 @@ public class Record
         this.diabetes=diabetes;
     }
 
-    public Record()
+    public Patient()
     {
         this("","","",-1,"","",false,false,false,false);
     }
 
-    public Record(String n, String p)
+    public Patient(String n, String p)
     {
         this(n, p, null, -1, "", null,false, false,false,false);
     }
@@ -214,10 +214,10 @@ public class Record
         System.out.println("High Blood Pressure: "+blood_pressure);
     }
 
-    public static Record defaultRecord()
+    public static Patient defaultRecord()
     {
-        Record record=new Record();
-        return record;
+        Patient patient =new Patient();
+        return patient;
     }
 
     public void updateRecord()

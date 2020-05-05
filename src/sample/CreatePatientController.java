@@ -8,7 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class CreateRecordController {
+public class CreatePatientController {
 
     public static AddScheduleWindowController obj=new AddScheduleWindowController();
 
@@ -52,9 +52,9 @@ public class CreateRecordController {
     void save() {
         try
         {
-            Record newRecord=new Record(NameTextField.getText(),PhoneTextField.getText(),"",Integer.valueOf(AgeTextField.getText()),DescriptionTextArea.getText(),"",HeartConditionCheckBox.isSelected(),AllergiesCheckBox.isSelected(),BloodPressureCheckBox.isSelected(),DiabetesCheckBox.isSelected());
-            RecordFile newFile=new RecordFile(newRecord);
-            obj.setRecord(newRecord);
+            Patient newPatient =new Patient(NameTextField.getText(),PhoneTextField.getText(),"",Integer.valueOf(AgeTextField.getText()),DescriptionTextArea.getText(),"",HeartConditionCheckBox.isSelected(),AllergiesCheckBox.isSelected(),BloodPressureCheckBox.isSelected(),DiabetesCheckBox.isSelected());
+            RecordFile newFile=new RecordFile(newPatient);
+            obj.setPatient(newPatient);
             closeWindow();
         }
         catch(Exception e)

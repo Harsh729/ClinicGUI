@@ -109,7 +109,7 @@ public class AppointmentFile extends ClinicFile{
         return null;
     }
 
-    public Exception editFile(int index, Record r)
+    public Exception editFile(int index, Patient r)
     {
         return editFile(index,r.getFileName());
     }

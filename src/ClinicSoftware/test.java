@@ -3,11 +3,11 @@ package ClinicSoftware;
 import java.io.File;
 import java.io.IOException;
 
-public class test extends Record {
+public class test extends Patient {
 
     public static void test(String[] args)throws IOException {
-        Record p1=new Record("Name","1234567890");
-        Record p2=new Record("Name2","999999999");
+        Patient p1=new Patient("Name","1234567890");
+        Patient p2=new Patient("Name2","999999999");
         System.out.println(p1.getName());
 
         Slot t1=new Slot(0.5,16);

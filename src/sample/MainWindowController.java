@@ -1,23 +1,18 @@
 package sample;
 
 import ClinicSoftware.*;
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
@@ -218,19 +213,19 @@ public class MainWindowController implements Initializable {
 
         PatientTable.getColumns().addAll(patientName,phone,age,money);
 
-        patientName.setCellValueFactory(new PropertyValueFactory<Record,String>("name"));
-        phone.setCellValueFactory(new PropertyValueFactory<Record,String>("phone"));
-        age.setCellValueFactory(new PropertyValueFactory<Record,Integer>("age"));
-        money.setCellValueFactory(new PropertyValueFactory<Record,Double>("money"));
+        patientName.setCellValueFactory(new PropertyValueFactory<Patient,String>("name"));
+        phone.setCellValueFactory(new PropertyValueFactory<Patient,String>("phone"));
+        age.setCellValueFactory(new PropertyValueFactory<Patient,Integer>("age"));
+        money.setCellValueFactory(new PropertyValueFactory<Patient,Double>("money"));
 
         try{
             File folder=new File(dir+"Records\\");
             File[] RecordFiles=folder.listFiles();
-            ObservableList<Record> data=FXCollections.observableArrayList();
+            ObservableList<Patient> data=FXCollections.observableArrayList();
             for(File file: RecordFiles)
             {
                 RecordFile recordFile=new RecordFile(file.getName().split("\\.")[0]);
-                Record rec=recordFile.readFile();
+                Patient rec=recordFile.readFile();
                 data.add(rec);
             }
             PatientTable.setItems(data);
@@ -465,7 +460,7 @@ public class MainWindowController implements Initializable {
     @FXML
     public void createRecord(){
         try {
-            CreateRecordMain obj = new CreateRecordMain();
+            CreatePatientMain obj = new CreatePatientMain();
             Stage stage = new Stage();
             obj.start(stage);
         }

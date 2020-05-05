@@ -1,7 +1,6 @@
 package sample;
 
 import ClinicSoftware.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -13,7 +12,6 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.LinkedList;
 
 public class ChangeAppointmentWindowController
 {
@@ -78,12 +76,12 @@ public class ChangeAppointmentWindowController
         @FXML
         void save() {
             try {
-                Record newPatient = new Record(nameTextField.getText(), phoneTextField.getText());
+                Patient newPatient = new Patient(nameTextField.getText(), phoneTextField.getText());
                 RecordFile patientFile = new RecordFile(newPatient.getFileName());
-                Record existingRecord=patientFile.readFile();
-                if(existingRecord!=null)
+                Patient existingPatient =patientFile.readFile();
+                if(existingPatient !=null)
                 {
-                    newPatient=existingRecord;
+                    newPatient= existingPatient;
                 }
                 else
                 {

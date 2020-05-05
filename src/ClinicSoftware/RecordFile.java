@@ -9,7 +9,7 @@ public class RecordFile extends ClinicFile{
     private String[] header = {"Name","Phone No.","Age","First Date","Latest Date","Description","Money","Heart Condition","Allergy","Diabetes","Blood Pressure","Amount Paid"};
     private String fileName = "";
 
-    public RecordFile(Record r)
+    public RecordFile(Patient r)
     {
         Exception e=null;
         fileName=r.getFileName();
@@ -25,7 +25,7 @@ public class RecordFile extends ClinicFile{
         this.fileName=fileName;
     }
 
-    Exception createFile(Record patient) {
+    Exception createFile(Patient patient) {
         try {
             FileWriter fw = new FileWriter(dir + folderName + patient.getFileName() + ".csv");
             CSVWriter writer = new CSVWriter(fw);
@@ -42,13 +42,13 @@ public class RecordFile extends ClinicFile{
         return null;
     }
 
-    public Record readFile() throws IOException {
+    public Patient readFile() throws IOException {
         try {
             FileReader fr = new FileReader(dir + folderName + fileName + ".csv");
             CSVReader reader = new CSVReader(fr);
             reader.readNext();
             String arr[] = reader.readNext();
-            Record r = new Record(arr[0], arr[1]);
+            Patient r = new Patient(arr[0], arr[1]);
             r.setMoney(Double.valueOf(arr[6]));
             r.setAge(Integer.valueOf(arr[2]));
             r.setFirstAppointmentFile(arr[3]);

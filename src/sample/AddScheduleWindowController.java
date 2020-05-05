@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
@@ -25,7 +24,7 @@ public class AddScheduleWindowController implements Initializable {
 
     LabWork lab=new LabWork();
     Prescription pre=new Prescription();
-    Record record=new Record();
+    Patient patient =new Patient();
 
 
     Slot slot=new Slot();
@@ -136,20 +135,20 @@ public class AddScheduleWindowController implements Initializable {
    public void save()
     {
         try {
-            Record newPatient = new Record(nameTextField.getText(), phoneTextField.getText());
+            Patient newPatient = new Patient(nameTextField.getText(), phoneTextField.getText());
             RecordFile patientFile = new RecordFile(newPatient.getFileName());
-            Record existingRecord=patientFile.readFile();
-            if(existingRecord!=null)
+            Patient existingPatient =patientFile.readFile();
+            if(existingPatient !=null)
             {
-                newPatient=existingRecord;
+                newPatient= existingPatient;
             }
             else
             {
                 RecordFile rf=new RecordFile(newPatient);
             }
-            if(record.getName()!="")
+            if(patient.getName()!="")
             {
-                newPatient=record;
+                newPatient= patient;
             }
             util.setSlots(slotStart,slotEnd);
             LinkedList<String> timeSlotsString=util.getTimeSlot();
@@ -220,7 +219,7 @@ public class AddScheduleWindowController implements Initializable {
     public void createRecord()
     {
         try {
-            CreateRecordMain obj = new CreateRecordMain();
+            CreatePatientMain obj = new CreatePatientMain();
             Stage stage = new Stage();
             obj.start(stage);
             obj.setObj(this);
@@ -231,9 +230,9 @@ public class AddScheduleWindowController implements Initializable {
         }
     }
 
-    public void setRecord(Record record)
+    public void setPatient(Patient patient)
     {
-        this.record=record;
+        this.patient = patient;
     }
 
     @FXML

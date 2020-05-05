@@ -44,7 +44,7 @@
         </SplitPane>
               <HBox fx:id="buttonBox" layoutX="1.0" layoutY="302.0" prefHeight="53.0" prefWidth="399.0" spacing="10.0">
                   <children>
-            <Button fx:id="CreateRecordButton" mnemonicParsing="false" onAction="#createRecord" text="+Record" />
+            <Button fx:id="CreateRecordButton" mnemonicParsing="false" onAction="#createRecord" text="+Patient" />
             <Button fx:id="CreateLabWorkButton" mnemonicParsing="false" onAction="#createLabWork" text="+LabWork" />
             <Button fx:id="CreatePrescriptionButton" mnemonicParsing="false" onAction="#createPrescription" text="+Prescription" />
                       <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancel" text="Cancel">

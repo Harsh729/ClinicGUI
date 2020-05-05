@@ -35,7 +35,7 @@ public class PayWindowController {
         try {
             selected.getAppointment().setPaid(Double.valueOf(AmountTextField.getText()));
             selected.getAppointment().pay();
-            RecordFile rf=new RecordFile(selected.getAppointment().getRecord());
+            PatientFile rf=new PatientFile(selected.getAppointment().getRecord());
             AppointmentFile file = new AppointmentFile(selected.getAppointment());
             closeWindow();
             obj.initializePatientTable();

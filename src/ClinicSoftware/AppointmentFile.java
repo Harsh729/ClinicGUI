@@ -50,7 +50,7 @@ public class AppointmentFile extends ClinicFile{
             String arr[] = reader.readNext();
             Slot s = new Slot();
             s = s.toSlot(arr[5]);
-            RecordFile rf = new RecordFile(arr[0]);
+            PatientFile rf = new PatientFile(arr[0]);
             Appointment a = new Appointment(rf.readFile(), arr[1], s);
             a.setPrice(Double.valueOf(arr[3]));
             LabWorkFile lf = new LabWorkFile(arr[4]);

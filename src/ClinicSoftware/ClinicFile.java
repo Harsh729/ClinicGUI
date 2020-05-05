@@ -3,7 +3,7 @@ package ClinicSoftware;
 import java.io.*;
 
 public class ClinicFile {
-
+    //TODO: to make a separate directory for asst.
     String dir = getDirectory();
 
 

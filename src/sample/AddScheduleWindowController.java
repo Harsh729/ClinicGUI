@@ -136,7 +136,7 @@ public class AddScheduleWindowController implements Initializable {
     {
         try {
             Patient newPatient = new Patient(nameTextField.getText(), phoneTextField.getText());
-            RecordFile patientFile = new RecordFile(newPatient.getFileName());
+            PatientFile patientFile = new PatientFile(newPatient.getFileName());
             Patient existingPatient =patientFile.readFile();
             if(existingPatient !=null)
             {
@@ -144,7 +144,7 @@ public class AddScheduleWindowController implements Initializable {
             }
             else
             {
-                RecordFile rf=new RecordFile(newPatient);
+                PatientFile rf=new PatientFile(newPatient);
             }
             if(patient.getName()!="")
             {

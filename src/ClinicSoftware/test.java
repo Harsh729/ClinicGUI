@@ -1,5 +1,7 @@
 package ClinicSoftware;
 
+import sample.Main;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -46,7 +48,8 @@ public class test extends Patient {
 
     public static void main(String args[])
     {
-        test2();
+        //Main asst = new Main();
+
     }
 
 }

@@ -222,6 +222,6 @@ public class Patient
 
     public void updateRecord()
     {
-        RecordFile file=new RecordFile(this);
+        PatientFile file=new PatientFile(this);
     }
 }

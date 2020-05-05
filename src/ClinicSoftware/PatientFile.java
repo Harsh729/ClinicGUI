@@ -4,12 +4,12 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import java.io.*;
 
-public class RecordFile extends ClinicFile{
+public class PatientFile extends ClinicFile{
     private String folderName = "Records/";
     private String[] header = {"Name","Phone No.","Age","First Date","Latest Date","Description","Money","Heart Condition","Allergy","Diabetes","Blood Pressure","Amount Paid"};
     private String fileName = "";
 
-    public RecordFile(Patient r)
+    public PatientFile(Patient r)
     {
         Exception e=null;
         fileName=r.getFileName();
@@ -20,7 +20,7 @@ public class RecordFile extends ClinicFile{
                 e.printStackTrace();
     }
 
-    public RecordFile(String fileName)
+    public PatientFile(String fileName)
     {
         this.fileName=fileName;
     }

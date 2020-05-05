@@ -53,7 +53,7 @@ public class CreatePatientController {
         try
         {
             Patient newPatient =new Patient(NameTextField.getText(),PhoneTextField.getText(),"",Integer.valueOf(AgeTextField.getText()),DescriptionTextArea.getText(),"",HeartConditionCheckBox.isSelected(),AllergiesCheckBox.isSelected(),BloodPressureCheckBox.isSelected(),DiabetesCheckBox.isSelected());
-            RecordFile newFile=new RecordFile(newPatient);
+            PatientFile newFile=new PatientFile(newPatient);
             obj.setPatient(newPatient);
             closeWindow();
         }

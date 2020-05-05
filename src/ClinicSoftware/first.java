@@ -9,14 +9,10 @@ class first
 {
     public static void main(String args[])throws Exception
     {
-        Main parul=new Main();
-        parul.setTitle("Dr. Parul Doshi");
-        parul.setUserSignature(0);
+        Main obj = new Main();
         Main.main(args);
-
-        Main asst=new Main();
-        asst.setTitle("Dr. Chaitali");
-        asst.setUserSignature(1);
-        Main.open();
+        obj.setTitle("Assistant Doctor");
+        obj.setUS(1);
+        Main.main(args);
     }
 }

@@ -31,11 +31,11 @@ public class MyDate {
         String myDate[]={""+day,""+month,""+year};
 
         if(noOfDigits(day)==1)
-            myDate[0]="0"+myDate[2];
+            myDate[0]="0"+myDate[0];
         if(noOfDigits(month)==1)
             myDate[1]="0"+myDate[1];
         if(noOfDigits(year)==1)
-            myDate[2]="0"+myDate[5];
+            myDate[2]="0"+myDate[2];
 
         return myDate;
     }

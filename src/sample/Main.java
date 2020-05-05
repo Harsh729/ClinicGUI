@@ -45,7 +45,7 @@ public class Main extends Application {
 
     public void Switch()
     {
-        title="Dr. Chaitali";
+        title="Assistant Doctor";
         setUserSignature(1);
     }
 

@@ -33,7 +33,7 @@ public class MainWindowController implements Initializable {
             Main.ctr++;
             Main obj = new Main();
             obj.setUserSignature(1);
-            obj.setTitle("Dr. Chaitali");
+            obj.setTitle("Assistant Doctor");
             try {
                 obj.start(new Stage());
             }

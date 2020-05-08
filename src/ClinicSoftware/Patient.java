@@ -146,8 +146,8 @@ public class Patient
     public void buildAppointments()
     {
         try {
-            AppointmentFile firstAppointment = new AppointmentFile(firstAppointmentFile);
-            AppointmentFile latestAppointment = new AppointmentFile(latestAppointmentFile);
+            AppointmentFile firstAppointment = new AppointmentFile(firstAppointmentFile, this.firstAppointment.getUserSignature());
+            AppointmentFile latestAppointment = new AppointmentFile(latestAppointmentFile, this.latestAppointment.getUserSignature());
             this.firstAppointment = firstAppointment.readFile();
             this.latestAppointment = latestAppointment.readFile();
             appointmentsBuiltFlag=true;

@@ -29,7 +29,8 @@ public class CreateScheduleController {
     void save() {
         try {
             MyDate mydate = new MyDate(date.getValue().toString());
-            Schedule schedule = new Schedule(mydate.toString());
+            obj.setUserSignature();
+            Schedule schedule = new Schedule(mydate.toString(),obj.getUserSignature());
             ScheduleFile file = new ScheduleFile(schedule);
             obj.initializeScheduleTable(mydate.toString());
             closeWindow();

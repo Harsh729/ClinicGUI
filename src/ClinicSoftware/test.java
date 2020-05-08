@@ -13,8 +13,8 @@ public class test extends Patient {
         System.out.println(p1.getName());
 
         Slot t1=new Slot(0.5,16);
-        Appointment a1=new Appointment(p1,"12-1-2019",t1);
-        Schedule s1=new Schedule("15-01-2019");
+        Appointment a1=new Appointment(p1,"12-1-2019",t1,0);
+        Schedule s1=new Schedule("15-01-2019",0);
         s1.add(a1);
         s1.addBreak();
         a1.setLab(a1.getDate(),"","","");
@@ -22,8 +22,8 @@ public class test extends Patient {
         Slot t2=new Slot(19);
         Slot t3=new Slot(18.5);
         ScheduleFile sf=new ScheduleFile(s1);
-        Appointment a2=new Appointment(p2,"14-01-2019",t2);
-        Appointment a3 = new Appointment(p2, "13-01-2019", t3);
+        Appointment a2=new Appointment(p2,"14-01-2019",t2,0);
+        Appointment a3 = new Appointment(p2, "13-01-2019", t3,0);
         sf.addEntry(a3);
         sf.addEntry(a2);
         s1.add(a3);

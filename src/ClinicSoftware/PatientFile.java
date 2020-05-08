@@ -11,6 +11,7 @@ public class PatientFile extends ClinicFile{
 
     public PatientFile(Patient r)
     {
+        super(-1);
         Exception e=null;
         fileName=r.getFileName();
         if(!isFilePresent(dir,folderName,fileName))
@@ -22,6 +23,7 @@ public class PatientFile extends ClinicFile{
 
     public PatientFile(String fileName)
     {
+        super(-1);
         this.fileName=fileName;
     }
 

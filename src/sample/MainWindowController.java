@@ -156,8 +156,8 @@ public class MainWindowController implements Initializable {
         {
             System.err.println("Null pointer exception");
         }
-        schedule=new Schedule();
-        ScheduleFile file=new ScheduleFile(date);
+        schedule=new Schedule("", userSignature);
+        ScheduleFile file=new ScheduleFile(date,schedule.getUserSignature());
         try {
             file.setUserSignature(userSignature);
             schedule = file.readFile();

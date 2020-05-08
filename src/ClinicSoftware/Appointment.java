@@ -39,8 +39,8 @@ public class Appointment {
         return userSignature;
     }
 
-    public Appointment(Patient patient, String date, Slot t1) {
-        this(patient, date, "", 0,t1,0);
+    public Appointment(Patient patient, String date, Slot t1, int userSignature) {
+        this(patient, date, "", 0,t1,userSignature);
     }
 
     public Patient getRecord() {

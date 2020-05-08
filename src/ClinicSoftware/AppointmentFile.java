@@ -9,6 +9,7 @@ public class AppointmentFile extends ClinicFile{
     private String fileName = "";
     public AppointmentFile(Appointment a)throws IOException
     {
+        super(a.userSignature);
         Exception e=null;
         fileName=a.getFileName();
         if(!isFilePresent(dir,folderName,fileName))
@@ -20,8 +21,9 @@ public class AppointmentFile extends ClinicFile{
             System.out.println("Exists");
     }
 
-    public AppointmentFile(String fileName)
+    public AppointmentFile(String fileName,int userSignature)
     {
+        super(userSignature);
         this.fileName=fileName;
     }
 
@@ -51,7 +53,7 @@ public class AppointmentFile extends ClinicFile{
             Slot s = new Slot();
             s = s.toSlot(arr[5]);
             PatientFile rf = new PatientFile(arr[0]);
-            Appointment a = new Appointment(rf.readFile(), arr[1], s);
+            Appointment a = new Appointment(rf.readFile(), arr[1], s,userSignature);
             a.setPrice(Double.valueOf(arr[3]));
             LabWorkFile lf = new LabWorkFile(arr[4]);
             a.setLab(lf.readFile());

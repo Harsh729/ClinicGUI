@@ -158,7 +158,7 @@ public class AddScheduleWindowController implements Initializable {
             for(int i=0;i<timeSlotsString.size();i++)
             {
                 timeSlotsSlot.add(slot.toSlot(timeSlotsString.get(i)));
-                Appointment newAppointment=new Appointment(newPatient,schedule.getDate(),timeSlotsSlot.get(i));
+                Appointment newAppointment=new Appointment(newPatient,schedule.getDate(),timeSlotsSlot.get(i),schedule.getUserSignature());
                 newAppointment.setProcedure(descriptionTextArea.getText());
                 newAppointment.setUserSignature(userSignature);
                 if(!isPriceAdded) {

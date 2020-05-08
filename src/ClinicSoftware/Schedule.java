@@ -6,19 +6,20 @@ public class Schedule
     LinkedList<Appointment> patients;
     String date;
     int patient_counter;
-
+    int userSignature;
     public Schedule(String date,int userSignature)
     {
         this.date=date;
         this.time=new LinkedList<Slot>();
         this.patients=new LinkedList<Appointment>();
         patient_counter=0;
+        this.userSignature = userSignature;
     }
 
     public Schedule(String date)
     {
         this(date,0);
-    }
+    } //deprecated
 
     public Schedule()
     {
@@ -45,6 +46,10 @@ public class Schedule
     public LinkedList<Appointment> getAppointments()
     {
         return patients;
+    }
+
+    public int getUserSignature() {
+        return userSignature;
     }
 
     public void add(Appointment a)
@@ -81,7 +86,7 @@ public class Schedule
     public void addBreak()
     {
         Patient b=new Patient("Break","");
-        Appointment Break=new Appointment(b,"",null);
+        Appointment Break=new Appointment(b,"",null,userSignature);
         add(Break);
     }
 

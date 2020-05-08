@@ -66,6 +66,7 @@ public class LabWork
 
     public void setPatientName(String patientName) {this.patientName=patientName;}
 
+
     public void display()
     {
         System.out.println("Patient Name: " +getPatientName());

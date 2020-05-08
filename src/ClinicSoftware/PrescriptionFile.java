@@ -6,15 +6,18 @@ public class PrescriptionFile extends ClinicFile
     private String prescriptionHeader[]={"Medicine Name","Instruction"};
     private String prescriptionFolder="Prescriptions/";
     private String fileName;
-    private String dir=super.getDirectory();
+    private String dir=super.getDirectory(-1);
 
     public PrescriptionFile(String fileName)
     {
+
+        super(-1);
         this.fileName=fileName;
     }
 
     public PrescriptionFile(Prescription prescription)
     {
+        super(-1);
         fileName=prescription.getFileName();
         if(!isFilePresent(dir,prescriptionFolder,fileName))
         {

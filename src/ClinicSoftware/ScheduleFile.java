@@ -15,6 +15,7 @@ public class ScheduleFile extends ClinicFile {
     private int timeDelay=250;
 
     public ScheduleFile(Schedule sch) throws IOException {
+        super(sch.getUserSignature());
         Exception e=null;
         fileName = sch.getFileName();
         if(!isFilePresent(dir,folderName,fileName))
@@ -24,8 +25,9 @@ public class ScheduleFile extends ClinicFile {
                 e.printStackTrace();
     }
 
-    public ScheduleFile(String fileName)
+    public ScheduleFile(String fileName, int userSignature)
     {
+        super(userSignature);
         this.fileName=fileName;
     }
 
@@ -59,12 +61,12 @@ public class ScheduleFile extends ClinicFile {
             CSVReader reader = new CSVReader(fr);
             reader.readNext();
             List<String[]> list = reader.readAll();
-            Schedule sc = new Schedule(fileName);
+            Schedule sc = new Schedule(fileName,userSignature);
             if(list!=null) {
                 for (String s[] : list) {
                     String time[] = s[0].split(" - ");
                     Slot sl = new Slot(Double.valueOf(time[1]) - Double.valueOf(time[0]), Double.valueOf(time[0]));
-                    AppointmentFile af = new AppointmentFile(s[1]);
+                    AppointmentFile af = new AppointmentFile(s[1], userSignature);
                     Appointment a = af.readFile();
                     if(a.getUserSignature()==userSignature) {
                         a.setTime(sl);

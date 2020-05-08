@@ -7,15 +7,19 @@ public class LabWorkFile extends ClinicFile
     private String labHeader[]={"Patient Name","Sent Date","Received Date","Lab Name","Description"};
     private String labFolder="Lab Work/";
     private String fileName;
-    private String dir=super.getDirectory();
+    private String dir=super.getDirectory(super.userSignature);
 
     public LabWorkFile(String fileName)
     {
+
+        super(-1);
         this.fileName=fileName;
     }
 
     public LabWorkFile(LabWork labWork)
     {
+        super(-1);
+        dir = super.getDirectory(userSignature);
         fileName=labWork.getFileName();
         if(!isFilePresent(dir,labFolder,fileName))
             System.out.println(createFileWithMessage(labWork));

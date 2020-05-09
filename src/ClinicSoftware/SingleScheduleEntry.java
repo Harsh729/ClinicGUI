@@ -1,5 +1,7 @@
 package ClinicSoftware;
 
+import java.io.IOException;
+
 public class SingleScheduleEntry {
     private String time;
     private String patientName;
@@ -56,5 +58,20 @@ public class SingleScheduleEntry {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void updateAppointment()
+    {
+        String file = this.appointment.getFileName();
+        try{
+            AppointmentFile af = new AppointmentFile(file,this.appointment.getUserSignature());
+            this.setAppointment(af.readFile());
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
     }
 }

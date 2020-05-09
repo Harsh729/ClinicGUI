@@ -37,6 +37,7 @@ public class PayWindowController {
             selected.getAppointment().pay();
             PatientFile rf=new PatientFile(selected.getAppointment().getRecord());
             AppointmentFile file = new AppointmentFile(selected.getAppointment());
+            selected.setAppointment(file.readFile());
             closeWindow();
             obj.initializePatientTable();
         }

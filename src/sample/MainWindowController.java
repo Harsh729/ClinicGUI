@@ -452,7 +452,9 @@ public class MainWindowController implements Initializable {
         PayWindowMain obj=new PayWindowMain();
         Stage stage=new Stage();
         obj.start(stage);
-        obj.setSelected((SingleScheduleEntry)ScheduleTable.getSelectionModel().getSelectedItem());
+        SingleScheduleEntry check = (SingleScheduleEntry)ScheduleTable.getSelectionModel().getSelectedItem();
+        check.updateAppointment();
+        obj.setSelected(check);
         obj.setObj(this);
     }
 

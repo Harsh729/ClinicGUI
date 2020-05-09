@@ -139,8 +139,13 @@ public class Patient
 
     public void pay(double amount)
     {
-        money-=amount;
-        setPaid(amount);
+        if(amount>=0)
+        {
+            money-=amount;
+            setPaid(amount);
+        }
+        else
+            updateMoney(-amount);
     }
 
     public void buildAppointments()

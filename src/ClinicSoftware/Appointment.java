@@ -27,6 +27,8 @@ public class Appointment {
         this.userSignature=userSignature;
 
         try{
+            if(patient.getAppointmentCounter()==0)
+                patient.setFirstAppointmentFile(this.getLabFileName());
             patient.setLatestAppointmentFile(this.getFileName());
             reflect();
         }

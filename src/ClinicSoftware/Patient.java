@@ -21,8 +21,9 @@ public class Patient
     private Appointment firstAppointment;
     private Appointment latestAppointment;
     private boolean appointmentsBuiltFlag=false;
+    private int appointment_counter = 0;
 
-    public Patient(String name, String phone, String firstAppointmentFile, int age, String description, String latestAppointmentFile, boolean heart_condition, boolean allergy, boolean blood_pressure, boolean diabetes)
+    public Patient(String name, String phone, String firstAppointmentFile, int age, String description, String latestAppointmentFile, boolean heart_condition, boolean allergy, boolean blood_pressure, boolean diabetes, int app_ctr)
     {
         this.name=name;
         this.phone=phone;
@@ -36,16 +37,23 @@ public class Patient
         this.allergy=allergy;
         this.blood_pressure=blood_pressure;
         this.diabetes=diabetes;
+        this.appointment_counter = app_ctr;
+
+    }
+
+    public Patient(String name, String phone, String firstAppointmentFile, int age, String description, String latestAppointmentFile, boolean heart_condition, boolean allergy, boolean blood_pressure, boolean diabetes)
+    {
+        this(name, phone, firstAppointmentFile,age,description,latestAppointmentFile,heart_condition,allergy,blood_pressure,diabetes,0);
     }
 
     public Patient()
     {
-        this("","","",-1,"","",false,false,false,false);
+        this("","","",-1,"","",false,false,false,false,0);
     }
 
     public Patient(String n, String p)
     {
-        this(n, p, null, -1, "", null,false, false,false,false);
+        this(n, p, null, -1, "", null,false, false,false,false,0);
     }
 
     public String getName()
@@ -101,9 +109,18 @@ public class Patient
         this.firstAppointmentFile=firstAppointmentFile;
     }
 
+    public void setAppointmentCounter(int appointment_counter) {
+        this.appointment_counter = appointment_counter;
+    }
+
+    public int getAppointmentCounter() {
+        return appointment_counter;
+    }
+
     public void setLatestAppointmentFile(String latestAppointmentFile)
     {
         this.latestAppointmentFile=latestAppointmentFile;
+        appointment_counter++;
     }
 
     public void setAge(int a)

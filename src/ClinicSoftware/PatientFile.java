@@ -6,7 +6,7 @@ import java.io.*;
 
 public class PatientFile extends ClinicFile{
     private String folderName = "Records/";
-    private String[] header = {"Name","Phone No.","Age","First Date","Latest Date","Description","Money","Heart Condition","Allergy","Diabetes","Blood Pressure","Amount Paid"};
+    private String[] header = {"Name","Phone No.","Age","First Date","Latest Date","Description","Money","Heart Condition","Allergy","Diabetes","Blood Pressure","Amount Paid","App Ctr"};
     private String fileName = "";
 
     public PatientFile(Patient r)
@@ -32,7 +32,7 @@ public class PatientFile extends ClinicFile{
             FileWriter fw = new FileWriter(dir + folderName + patient.getFileName() + ".csv");
             CSVWriter writer = new CSVWriter(fw);
             writer.writeNext(header);
-            String[] recordDetails = {patient.getName(), "" + patient.getPhone(), "" + patient.getAge(), patient.getFirstAppointmentFile(), patient.getLatestAppointmentFile(), patient.getDesc(), patient.getMoney() + "", patient.getHeartCondition() + "", patient.getAllergy() + "", patient.getDiabetes() + "", patient.getBloodPressure() + "",patient.getPaid()+""};
+            String[] recordDetails = {patient.getName(), "" + patient.getPhone(), "" + patient.getAge(), patient.getFirstAppointmentFile(), patient.getLatestAppointmentFile(), patient.getDesc(), patient.getMoney() + "", patient.getHeartCondition() + "", patient.getAllergy() + "", patient.getDiabetes() + "", patient.getBloodPressure() + "",patient.getPaid()+"",patient.getAppointmentCounter()+""};
             writer.writeNext(recordDetails);
             writer.close();
             fw.close();
@@ -61,6 +61,8 @@ public class PatientFile extends ClinicFile{
             r.setDiabetes(Boolean.valueOf(arr[9]));
             r.setBloodPressure(Boolean.valueOf(arr[10]));
             r.setPaid(Double.valueOf(arr[11]));
+            if(arr.length>12)
+            r.setAppointmentCounter(Integer.valueOf(arr[12]));
             return r;
         }
         catch (FileNotFoundException e)

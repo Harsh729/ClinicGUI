@@ -25,6 +25,15 @@ public class Appointment {
         lab=new LabWork();
         prescription = new Prescription();
         this.userSignature=userSignature;
+
+        try{
+            patient.setLatestAppointmentFile(this.getFileName());
+            reflect();
+        }
+        catch(NullPointerException e)
+        {
+            System.out.println("Patient is null in Appointment constructor.");
+        }
     }
 
     public Appointment() {

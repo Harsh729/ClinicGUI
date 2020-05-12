@@ -148,11 +148,11 @@ public class Patient
             updateMoney(-amount);
     }
 
-    public void buildAppointments()
+    public void buildAppointments(int userSignature)
     {
         try {
-            AppointmentFile firstAppointment = new AppointmentFile(firstAppointmentFile, this.firstAppointment.getUserSignature());
-            AppointmentFile latestAppointment = new AppointmentFile(latestAppointmentFile, this.latestAppointment.getUserSignature());
+            AppointmentFile firstAppointment = new AppointmentFile(firstAppointmentFile, userSignature);
+            AppointmentFile latestAppointment = new AppointmentFile(latestAppointmentFile, userSignature);
             this.firstAppointment = firstAppointment.readFile();
             this.latestAppointment = latestAppointment.readFile();
             appointmentsBuiltFlag=true;
@@ -167,6 +167,7 @@ public class Patient
             System.err.println(e);
             appointmentsBuiltFlag=false;
         }
+
 
     }
 

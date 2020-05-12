@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -214,14 +215,18 @@ public class MainWindowController implements Initializable {
         TableColumn patientName=new TableColumn("Patient Name");
         TableColumn phone=new TableColumn("Phone No.");
         TableColumn age=new TableColumn("Age");
+        TableColumn description = new TableColumn("Description");
         TableColumn money=new TableColumn("Pending amount");
 
-        PatientTable.getColumns().addAll(patientName,phone,age,money);
+        PatientTable.getColumns().addAll(patientName,phone,age,description,money);
 
-        patientName.setCellValueFactory(new PropertyValueFactory<Patient,String>("name"));
-        phone.setCellValueFactory(new PropertyValueFactory<Patient,String>("phone"));
-        age.setCellValueFactory(new PropertyValueFactory<Patient,Integer>("age"));
-        money.setCellValueFactory(new PropertyValueFactory<Patient,Double>("money"));
+//        patientName.setCellValueFactory(new PropertyValueFactory<Patient,String>("name"));
+//        phone.setCellValueFactory(new PropertyValueFactory<Patient,String>("phone"));
+//        age.setCellValueFactory(new PropertyValueFactory<Patient,Integer>("age"));
+//        description.setCellValueFactory(new PropertyValueFactory<Patient,String>("desc"));
+//        money.setCellValueFactory(new PropertyValueFactory<Patient,Double>("money"));
+
+        ObservableList<PatientTableWrapper> data2 = FXCollections.observableArrayList();
 
         try{
             File folder=new File(dir+"Records\\");
@@ -231,14 +236,43 @@ public class MainWindowController implements Initializable {
             {
                 PatientFile patientFile =new PatientFile(file.getName().split("\\.")[0]);
                 Patient rec= patientFile.readFile();
+                rec.buildAppointments(userSignature);
+                PatientTableWrapper pat = new PatientTableWrapper(rec);
                 data.add(rec);
+                data2.add(pat);
             }
-            PatientTable.setItems(data);
+           //PatientTable.setItems(data);
         }
         catch(Exception e)
         {
             e.printStackTrace();
         }
+
+        patientName.setCellValueFactory(new PropertyValueFactory<PatientTableWrapper,String>("name"));
+        phone.setCellValueFactory(new PropertyValueFactory<PatientTableWrapper,String>("phone"));
+        age.setCellValueFactory(new PropertyValueFactory<PatientTableWrapper,Integer>("age"));
+        description.setCellValueFactory(new PropertyValueFactory<PatientTableWrapper,String>("desc"));
+        money.setCellValueFactory(new PropertyValueFactory<PatientTableWrapper,Double>("money"));
+
+        TableColumn latest = new TableColumn("Latest");
+        TableColumn heart = new TableColumn("Heart Condition");
+        TableColumn allergy = new TableColumn("Allergies");
+        TableColumn bp = new TableColumn("Blood Pressure");
+        TableColumn diabetes = new TableColumn("Diabetes");
+
+        PatientTable.getColumns().addAll(latest,heart,allergy,bp,diabetes);
+
+        latest.setCellValueFactory(new PropertyValueFactory<PatientTableWrapper, String>("latest"));
+        heart.setCellValueFactory(new PropertyValueFactory<PatientTableWrapper, ImageView>("heart"));
+        allergy.setCellValueFactory(new PropertyValueFactory<PatientTableWrapper, ImageView>("allergy"));
+        bp.setCellValueFactory(new PropertyValueFactory<PatientTableWrapper, ImageView>("bp"));
+        diabetes.setCellValueFactory(new PropertyValueFactory<PatientTableWrapper, ImageView>("diabetes"));
+
+        heart.setMaxWidth(60);
+        allergy.setMaxWidth(60);
+        bp.setMaxWidth(60);
+        diabetes.setMaxWidth(60);
+        PatientTable.setItems(data2);
 
     }
 

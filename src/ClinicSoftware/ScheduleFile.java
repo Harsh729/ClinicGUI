@@ -81,7 +81,7 @@ public class ScheduleFile extends ClinicFile {
         {
             System.err.println("Exception occurred: File not found");
             //e.printStackTrace();
-            return new Schedule();
+            return new Schedule(this.fileName, this.userSignature);
         }
         catch(Exception e)
         {

@@ -3,6 +3,7 @@ package ClinicSoftware;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import java.io.*;
+import java.util.*;
 
 public class PatientFile extends ClinicFile{
     private String folderName = "Records/";
@@ -34,6 +35,8 @@ public class PatientFile extends ClinicFile{
             writer.writeNext(header);
             String[] recordDetails = {patient.getName(), "" + patient.getPhone(), "" + patient.getAge(), patient.getFirstAppointmentFile(), patient.getLatestAppointmentFile(), patient.getDesc(), patient.getMoney() + "", patient.getHeartCondition() + "", patient.getAllergy() + "", patient.getDiabetes() + "", patient.getBloodPressure() + "",patient.getPaid()+"",patient.getAppointmentCounter()+""};
             writer.writeNext(recordDetails);
+            String apps[] = (String[])patient.getApps().toArray();
+            writer.writeNext(apps);
             writer.close();
             fw.close();
         }
@@ -63,6 +66,9 @@ public class PatientFile extends ClinicFile{
             r.setPaid(Double.valueOf(arr[11]));
             if(arr.length>12)
             r.setAppointmentCounter(Integer.valueOf(arr[12]));
+            String apps[] = reader.readNext();
+            Stack app = toStack(apps);
+            r.setApps(app);
             return r;
         }
         catch (FileNotFoundException e)
@@ -77,6 +83,16 @@ public class PatientFile extends ClinicFile{
             e.printStackTrace();
             return null;
         }
+    }
+
+    public Stack toStack(String[] data)
+    {
+        Stack s = new Stack<String>();
+        for(String str:data)
+        {
+            s.push(str);
+        }
+        return s;
     }
 
     public boolean deleteFile()

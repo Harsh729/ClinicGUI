@@ -1,6 +1,7 @@
 package ClinicSoftware;
 
 import java.io.FileNotFoundException;
+import java.util.*;
 
 public class Patient
 {
@@ -22,6 +23,7 @@ public class Patient
     private Appointment latestAppointment;
     private boolean appointmentsBuiltFlag=false;
     private int appointment_counter = 0;
+    private Stack apps = new Stack<String>();
 
     public Patient(String name, String phone, String firstAppointmentFile, int age, String description, String latestAppointmentFile, boolean heart_condition, boolean allergy, boolean blood_pressure, boolean diabetes, int app_ctr)
     {
@@ -117,10 +119,33 @@ public class Patient
         return appointment_counter;
     }
 
+    public void setApps(Stack apps) {
+        this.apps = apps;
+    }
+
+    public Stack getApps() {
+        return apps;
+    }
+
     public void setLatestAppointmentFile(String latestAppointmentFile)
     {
         this.latestAppointmentFile=latestAppointmentFile;
+        this.apps.add(latestAppointmentFile);
         appointment_counter++;
+    }
+
+    public void updateLatestAppointment(Appointment app)
+    {
+        if(this.apps.peek().equals(app.getFileName()))
+        {
+            apps.pop();
+            appointment_counter--;
+            latestAppointmentFile = (String)apps.peek();
+        }
+        else
+        {
+            apps.remove(app);
+        }
     }
 
     public void setAge(int a)

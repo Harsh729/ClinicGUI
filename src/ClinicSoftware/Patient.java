@@ -146,6 +146,7 @@ public class Patient
         {
             apps.remove(app);
         }
+        this.updateRecord();
     }
 
     public void setAge(int a)

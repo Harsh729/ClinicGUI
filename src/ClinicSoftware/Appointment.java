@@ -206,4 +206,17 @@ public class Appointment {
             e.printStackTrace();
         }
     }
+
+    public void delete()
+    {
+        try {
+            AppointmentFile af = new AppointmentFile(this);
+            af.delete();
+            this.patient.updateLatestAppointment(this);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

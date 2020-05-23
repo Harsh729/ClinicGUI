@@ -101,7 +101,11 @@ public class Schedule
     {
         int index=this.time.indexOf(time);
         this.time.remove(time);
-        patients.remove(index);
+        Appointment app = patients.remove(index);
+        if(!patients.contains(app))
+        {
+            app.delete();
+        }
     }
 
     Slot searchSlot(Appointment appointment) {

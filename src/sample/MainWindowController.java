@@ -468,6 +468,7 @@ public class MainWindowController implements Initializable {
             ScheduleFile file=new ScheduleFile(schedule);
             if(file.deleteEntry(row.getSlot())==null)
             {
+                schedule.remove(row.getSlot());
                 System.out.println("Deleted successfully.");
             }
             initializeScheduleTable(schedule.getDate());

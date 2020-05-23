@@ -68,7 +68,7 @@ public class ScheduleFile extends ClinicFile {
                     Slot sl = new Slot(Double.valueOf(time[1]) - Double.valueOf(time[0]), Double.valueOf(time[0]));
                     AppointmentFile af = new AppointmentFile(s[1], userSignature);
                     Appointment a = af.readFile();
-                    if(a.getUserSignature()==userSignature) {
+                    if(a!=null && a.getUserSignature()==userSignature) {
                         a.setTime(sl);
                         sc.add(a);
                     }

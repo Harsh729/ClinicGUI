@@ -5,27 +5,25 @@ import com.opencsv.CSVWriter;
 import java.io.*;
 import java.util.*;
 
-public class PatientFile extends ClinicFile{
+public class PatientFile extends ClinicFile {
     private String folderName = "Records/";
-    private String[] header = {"Name","Phone No.","Age","First Date","Latest Date","Description","Money","Heart Condition","Allergy","Diabetes","Blood Pressure","Amount Paid","App Ctr"};
+    private String[] header = {"Name", "Phone No.", "Age", "First Date", "Latest Date", "Description", "Money", "Heart Condition", "Allergy", "Diabetes", "Blood Pressure", "Amount Paid", "App Ctr"};
     private String fileName = "";
 
-    public PatientFile(Patient r)
-    {
+    public PatientFile(Patient r) {
         super(-1);
-        Exception e=null;
-        fileName=r.getFileName();
-        if(!isFilePresent(dir,folderName,fileName))
-            if((e=createFile(r))==null)
+        Exception e = null;
+        fileName = r.getFileName();
+        if (!isFilePresent(dir, folderName, fileName))
+            if ((e = createFile(r)) == null)
                 System.out.println("File created successfully");
             else
                 e.printStackTrace();
     }
 
-    public PatientFile(String fileName)
-    {
+    public PatientFile(String fileName) {
         super(-1);
-        this.fileName=fileName;
+        this.fileName = fileName;
     }
 
     Exception createFile(Patient patient) {
@@ -33,15 +31,13 @@ public class PatientFile extends ClinicFile{
             FileWriter fw = new FileWriter(dir + folderName + patient.getFileName() + ".csv");
             CSVWriter writer = new CSVWriter(fw);
             writer.writeNext(header);
-            String[] recordDetails = {patient.getName(), "" + patient.getPhone(), "" + patient.getAge(), patient.getFirstAppointmentFile(), patient.getLatestAppointmentFile(), patient.getDesc(), patient.getMoney() + "", patient.getHeartCondition() + "", patient.getAllergy() + "", patient.getDiabetes() + "", patient.getBloodPressure() + "",patient.getPaid()+"",patient.getAppointmentCounter()+""};
+            String[] recordDetails = {patient.getName(), "" + patient.getPhone(), "" + patient.getAge(), patient.getFirstAppointmentFile(), patient.getLatestAppointmentFile(), patient.getDesc(), patient.getMoney() + "", patient.getHeartCondition() + "", patient.getAllergy() + "", patient.getDiabetes() + "", patient.getBloodPressure() + "", patient.getPaid() + "", patient.getAppointmentCounter() + ""};
             writer.writeNext(recordDetails);
-            String apps[] = (String[])patient.getApps().toArray();
+            String apps[] = toStringArray(patient.getApps());
             writer.writeNext(apps);
             writer.close();
             fw.close();
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             return e;
         }
         return null;
@@ -53,46 +49,56 @@ public class PatientFile extends ClinicFile{
             CSVReader reader = new CSVReader(fr);
             reader.readNext();
             String arr[] = reader.readNext();
-            Patient r = new Patient(arr[0], arr[1]);
-            r.setMoney(Double.valueOf(arr[6]));
-            r.setAge(Integer.valueOf(arr[2]));
-            r.setFirstAppointmentFile(arr[3]);
-            r.setLatestAppointmentFile(arr[4]);
-            r.setDesc(arr[5]);
-            r.setHeartCondition(Boolean.valueOf(arr[7]));
-            r.setAllergy(Boolean.valueOf(arr[8]));
-            r.setDiabetes(Boolean.valueOf(arr[9]));
-            r.setBloodPressure(Boolean.valueOf(arr[10]));
-            r.setPaid(Double.valueOf(arr[11]));
-            if(arr.length>12)
-            r.setAppointmentCounter(Integer.valueOf(arr[12]));
-            String apps[] = reader.readNext();
-            Stack app = toStack(apps);
-            r.setApps(app);
+            Patient r = null;
+            if (arr != null) {
+                r = new Patient(arr[0], arr[1]);
+                r.setMoney(Double.valueOf(arr[6]));
+                r.setAge(Integer.valueOf(arr[2]));
+                r.setFirstAppointmentFile(arr[3]);
+                r.setLatestAppointmentFile(arr[4]);
+                r.setDesc(arr[5]);
+                r.setHeartCondition(Boolean.valueOf(arr[7]));
+                r.setAllergy(Boolean.valueOf(arr[8]));
+                r.setDiabetes(Boolean.valueOf(arr[9]));
+                r.setBloodPressure(Boolean.valueOf(arr[10]));
+                r.setPaid(Double.valueOf(arr[11]));
+                if (arr.length > 12)
+                    r.setAppointmentCounter(Integer.valueOf(arr[12]));
+
+                String apps[] = reader.readNext();
+                if (apps != null) {
+                    Stack app = toStack(apps);
+                    r.setApps(app);
+                }
+            }
             return r;
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             System.err.println("Exception occurred: File not found");
             //e.printStackTrace();
             return null;
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             System.err.println("An unknown exception occurred:");
             e.printStackTrace();
             return null;
         }
     }
 
-    public Stack toStack(String[] data)
-    {
+    public Stack toStack(String[] data) {
         Stack s = new Stack<String>();
-        for(String str:data)
-        {
+        for (String str : data) {
             s.push(str);
         }
         return s;
+    }
+
+    public String[] toStringArray(Stack s)
+    {
+        String str[] = new String[s.size()];
+        for(int i=s.size()-1;i>=0;i++)
+        {
+            str[i] = s.pop().toString();
+        }
+        return str;
     }
 
     public boolean deleteFile()

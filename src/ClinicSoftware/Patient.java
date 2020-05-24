@@ -129,9 +129,13 @@ public class Patient
 
     public void setLatestAppointmentFile(String latestAppointmentFile)
     {
-        this.latestAppointmentFile=latestAppointmentFile;
-        this.apps.add(latestAppointmentFile);
-        appointment_counter++;
+        if(!apps.empty())
+            if(!apps.peek().equals(latestAppointmentFile))
+            {
+                this.latestAppointmentFile=latestAppointmentFile;
+                this.apps.add(latestAppointmentFile);
+                appointment_counter++;
+            }
     }
 
     public void updateLatestAppointment(Appointment app)//after deletion of latest appointment
@@ -273,5 +277,6 @@ public class Patient
     public void updatePatient()
     {
         PatientFile file=new PatientFile(this);
+        file.createFile(this);
     }
 }

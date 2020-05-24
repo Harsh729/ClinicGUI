@@ -49,7 +49,7 @@ public class PatientFile extends ClinicFile {
             CSVReader reader = new CSVReader(fr);
             reader.readNext();
             String arr[] = reader.readNext();
-            Patient r = null;
+            Patient r = new Patient();
             if (arr != null) {
                 r = new Patient(arr[0], arr[1]);
                 r.setMoney(Double.valueOf(arr[6]));
@@ -94,9 +94,12 @@ public class PatientFile extends ClinicFile {
     public String[] toStringArray(Stack s)
     {
         String str[] = new String[s.size()];
-        for(int i=s.size()-1;i>=0;i++)
+        for(int i=s.size()-1;i>=0;i--)
         {
-            str[i] = s.pop().toString();
+            if(!s.empty())
+                str[i] = s.pop().toString();
+            else
+                break;
         }
         return str;
     }

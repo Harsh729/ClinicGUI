@@ -39,7 +39,7 @@ public class Appointment {
     }
 
     public Appointment() {
-        this(Patient.defaultRecord(), "", "", 0,null,0);
+        this(Patient.defaultPatient(), "", "", 0,null,0);
     }
 
     public void setUserSignature(int userSignature) {
@@ -107,13 +107,13 @@ public class Appointment {
     public void reflect()
     {
         patient.updateMoney(price);
-        patient.updateRecord();
+        patient.updatePatient();
     }
 
     public void pay()
     {
         patient.pay(paid);
-        patient.updateRecord();
+        patient.updatePatient();
     }
 
     public void setPaid(double paid)

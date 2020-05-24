@@ -134,19 +134,20 @@ public class Patient
         appointment_counter++;
     }
 
-    public void updateLatestAppointment(Appointment app)
+    public void updateLatestAppointment(Appointment app)//after deletion of latest appointment
     {
-        if(this.apps.peek().equals(app.getFileName()))
-        {
-            apps.pop();
-            appointment_counter--;
-            latestAppointmentFile = (String)apps.peek();
+        if(!this.apps.empty()) {
+            if (this.apps.peek().equals(app.getFileName())) {
+                apps.pop();
+                appointment_counter--;
+                latestAppointmentFile = (String) apps.peek();
+            } else {
+                apps.remove(app);
+            }
+            this.updatePatient();
         }
         else
-        {
-            apps.remove(app);
-        }
-        this.updateRecord();
+            latestAppointmentFile = "";
     }
 
     public void setAge(int a)
@@ -263,13 +264,13 @@ public class Patient
         System.out.println("High Blood Pressure: "+blood_pressure);
     }
 
-    public static Patient defaultRecord()
+    public static Patient defaultPatient()
     {
         Patient patient =new Patient();
         return patient;
     }
 
-    public void updateRecord()
+    public void updatePatient()
     {
         PatientFile file=new PatientFile(this);
     }

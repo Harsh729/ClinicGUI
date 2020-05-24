@@ -174,6 +174,7 @@ public class AddScheduleWindowController implements Initializable {
                 if(pre.getPatientName()!="")
                     newAppointment.setPrescription(pre);
                 AppointmentFile appointmentFile=new AppointmentFile(newAppointment);
+                appointmentFile.createFile(newAppointment);
                 if(newScheduleFile.addEntry(newAppointment)==null)
                 {
                     System.out.println("Entry added successfully");

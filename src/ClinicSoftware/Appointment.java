@@ -200,6 +200,7 @@ public class Appointment {
     {
         try {
             AppointmentFile file = new AppointmentFile(this);
+            file.createFile(this);
         }
         catch(Exception e)
         {

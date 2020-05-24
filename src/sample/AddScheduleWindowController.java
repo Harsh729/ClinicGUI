@@ -162,7 +162,7 @@ public class AddScheduleWindowController implements Initializable {
                 newAppointment.setProcedure(descriptionTextArea.getText());
                 newAppointment.setUserSignature(userSignature);
                 if(!isPriceAdded) {
-                    String check=priceTextField.getText();
+                    //String check=priceTextField.getText();
                     if(!priceTextField.getText().equals("")) {
                         newAppointment.setPrice(Double.valueOf(priceTextField.getText()));
                         newAppointment.reflect();

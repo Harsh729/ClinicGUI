@@ -16,7 +16,7 @@ public class Appointment {
         this.date = date;
         this.procedure = procedure;
         this.price = price;
-        patient.updateMoney(price);
+        //patient.updateMoney(price);
         paid=0;
         if(time!=null)
             this.time=time;
@@ -28,7 +28,7 @@ public class Appointment {
 
         try{
             if(patient.getAppointmentCounter()==0)
-                patient.setFirstAppointmentFile(this.getLabFileName());
+                patient.setFirstAppointmentFile(this.getFileName());
             patient.setLatestAppointmentFile(this.getFileName());
             reflect();
         }

@@ -19,6 +19,8 @@ public class PatientFile extends ClinicFile {
                 System.out.println("File created successfully");
             else
                 e.printStackTrace();
+        else
+            System.out.println("PF: Exists");
     }
 
     public PatientFile(String fileName) {

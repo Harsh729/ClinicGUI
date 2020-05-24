@@ -18,7 +18,7 @@ public class AppointmentFile extends ClinicFile{
             else
                 e.printStackTrace();
         else
-            System.out.println("Exists");
+            System.out.println("AF: Exists");
     }
 
     public AppointmentFile(String fileName,int userSignature)

@@ -17,18 +17,18 @@ public class ClinicFile {
         String tempdir=System.getProperty("user.dir");
         tempdir=tempdir+"\\Directories\\";
         if(userSignature==0)
-            tempdir += "\\Owner\\";
+            tempdir += "Owner\\";
         else if(userSignature==1)
-            tempdir += "\\Asst\\";
+            tempdir += "Asst\\";
         return tempdir;
     }
 
     boolean isFilePresent(String dir,String folderName,String fileName)
     {
-        System.out.println(this.dir);
+        //System.out.println(this.dir);
         try
         {
-            FileReader fr=new FileReader(dir+folderName+fileName);
+            FileReader fr=new FileReader(dir+folderName+fileName+".csv");
         }
         catch(FileNotFoundException e)
         {

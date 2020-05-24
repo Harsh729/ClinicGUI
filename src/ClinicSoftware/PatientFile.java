@@ -28,7 +28,7 @@ public class PatientFile extends ClinicFile {
         this.fileName = fileName;
     }
 
-    Exception createFile(Patient patient) {
+    public Exception createFile(Patient patient) {
         try {
             FileWriter fw = new FileWriter(dir + folderName + patient.getFileName() + ".csv");
             CSVWriter writer = new CSVWriter(fw);
@@ -88,13 +88,15 @@ public class PatientFile extends ClinicFile {
     public Stack toStack(String[] data) {
         Stack s = new Stack<String>();
         for (String str : data) {
+            if(!str.equals(""))
             s.push(str);
         }
         return s;
     }
 
-    public String[] toStringArray(Stack s)
+    public String[] toStringArray(Stack st)
     {
+        Stack s = (Stack)st.clone();
         String str[] = new String[s.size()];
         for(int i=s.size()-1;i>=0;i--)
         {

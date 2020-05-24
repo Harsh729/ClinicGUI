@@ -3,7 +3,11 @@ package ClinicSoftware;
 import sample.Main;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 
 public class test extends Patient {
 
@@ -46,10 +50,24 @@ public class test extends Patient {
         System.out.println(Slot.format(one));
     }
 
-    public static void main(String args[])
+    public static void main(String args[])throws IOException
     {
         //Main asst = new Main();
+        fileTest();
 
+    }
+
+    public static void fileTest()throws IOException
+    {
+        String dir = System.getProperty("user.dir")+"\\test.csv";
+        FileWriter fw = new FileWriter(dir);
+        CSVWriter writer = new CSVWriter(fw);
+        writer.writeNext(null);
+        FileReader fr = new FileReader(dir);
+        CSVReader reader = new CSVReader(fr);
+        String line1[] = reader.readNext();
+        String line2[] = reader.readNext();
+        System.out.println(line1);
     }
 
 }

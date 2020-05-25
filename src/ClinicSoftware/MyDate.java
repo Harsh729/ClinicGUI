@@ -16,9 +16,9 @@ public class MyDate {
     public MyDate(String date)
     {
         String[] temp=date.split("-");
-        this.date[0]=temp[2];
-        this.date[1]=temp[1];
-        this.date[2]=temp[0];
+        this.date[0]=temp[2];//year
+        this.date[1]=temp[1];//month
+        this.date[2]=temp[0];//day
     }
 
     String[] getDate(Date date)
@@ -68,5 +68,31 @@ public class MyDate {
             }
         }
         return -999;
+    }
+
+    public boolean isLaterThan(MyDate date)
+    {
+        int idate[] = toIntegerArray(date);
+        int this_idate[] = toIntegerArray(this);
+        if(this_idate[0] > idate[0])//year
+            return true;
+        else if(this_idate[0] == idate[0])
+            if(this_idate[1] > idate[1])//month
+                return true;
+            else if(this_idate[1] == idate[1])
+                if(this_idate[2] > idate[2])//day
+                    return true;
+        return false;
+
+    }
+
+    public int[] toIntegerArray(MyDate date)
+    {
+        int d[]=new int[3];
+        for(int i=0;i<3;i++)
+        {
+            d[i] = Integer.valueOf(date.date[i]);
+        }
+        return d;
     }
 }

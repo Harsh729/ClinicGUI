@@ -141,9 +141,13 @@ public class Patient
 
     public static String getDateFromAppointment(String file)
     {
-        int start = file.indexOf('-') - 2;
-        if(start!=-3)
-            return file.substring(start);
+        if(file!=null) {
+            int start = file.indexOf('-') - 2;
+            if (start != -3)
+                return file.substring(start);
+            else
+                return "Date not found";
+        }
         else
             return "Date not found";
     }

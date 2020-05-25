@@ -139,6 +139,15 @@ public class Patient
             }
     }
 
+    public static String getDateFromAppointment(String file)
+    {
+        int start = file.indexOf('-') - 2;
+        if(start!=-3)
+            return file.substring(start);
+        else
+            return "Date not found";
+    }
+
     public Stack chronoAdd(Stack s, String ele)//adding chronologically
     {
         int start = ele.indexOf('-') - 2;//dd-mm-yyyy

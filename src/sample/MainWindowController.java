@@ -351,6 +351,9 @@ public class MainWindowController implements Initializable {
     private Button PatientTabButton;
 
     @FXML
+    private Button DisplayPatientDetailsButton;
+
+    @FXML
     private TableView PatientTable;
 
     @FXML
@@ -493,6 +496,26 @@ public class MainWindowController implements Initializable {
         check.updateAppointment();
         obj.setSelected(check);
         obj.setObj(this);
+    }
+
+    @FXML
+    public void openPatientDetailsWindow()
+    {
+        PatientDetailsWindowMain obj = new PatientDetailsWindowMain();
+        PatientTableWrapper wrap = (PatientTableWrapper)PatientTable.getSelectionModel().getSelectedItem();
+        PatientFile file = new PatientFile(wrap.getFileName());
+        try {
+            Patient patient = file.readFile();
+            obj.setPatient(patient);
+            Stage stage = new Stage();
+            obj.start(stage);
+        }
+        catch(Exception e)
+        {
+            System.out.print("Exception at openPatientWindow:");
+            e.printStackTrace();
+
+        }
     }
 
     @FXML

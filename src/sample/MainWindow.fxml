@@ -73,16 +73,43 @@
                                 </SplitPane>
                             </children>
                         </AnchorPane>
-                  <AnchorPane fx:id="PatientAnchorPane" prefHeight="562.0" prefWidth="674.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <TableView fx:id="PatientTable" prefHeight="560.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
                         <AnchorPane fx:id="LabWorkAnchorPane" layoutY="-2.0" prefHeight="562.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
                             <children>
                                 <TableView fx:id="LabWorkTable" prefHeight="560.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                             </children>
                         </AnchorPane>
+                  <AnchorPane fx:id="PatientAnchorPane" prefHeight="562.0" prefWidth="674.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <SplitPane dividerPositions="0.8781362007168458" orientation="VERTICAL" prefHeight="560.0" prefWidth="674.0">
+                          <items>
+                            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="PatientTable" prefHeight="516.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane maxHeight="63.0" prefHeight="105.0" prefWidth="670.0" SplitPane.resizableWithParent="false">
+                                 <children>
+                                    <HBox prefHeight="63.0" prefWidth="670.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                       <children>
+                                          <Button fx:id="DisplayPatientDetailsButton" mnemonicParsing="false" onAction="#openPatientDetailsWindow" prefHeight="42.0" prefWidth="100.0" text="Details">
+                                             <HBox.margin>
+                                                <Insets left="560.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="21.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                       <padding>
+                                          <Insets right="10.0" top="5.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
                         <AnchorPane fx:id="ScheduleAnchorPane" layoutX="2.0" prefHeight="560.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
                                 <SplitPane dividerPositions="0.8942652329749103" orientation="VERTICAL" prefHeight="560.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -94,7 +121,7 @@
                                         </AnchorPane>
                                         <AnchorPane maxHeight="63.0" prefHeight="105.0" prefWidth="670.0" SplitPane.resizableWithParent="false">
                                             <children>
-                                                <HBox alignment="CENTER_RIGHT" prefHeight="63.0" prefWidth="672.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0">
+                                                <HBox alignment="CENTER_RIGHT" prefHeight="63.0" prefWidth="672.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                                     <children>
                                                         <DatePicker fx:id="ScheduleDatePicker" onAction="#setScheduleDate" />
                                           <Button fx:id="ScheduleTableAddButton" mnemonicParsing="false" onAction="#openScheduleAddWindow" prefHeight="42.0" prefWidth="85.0" text="Add">

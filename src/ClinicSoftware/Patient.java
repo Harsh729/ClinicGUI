@@ -132,9 +132,37 @@ public class Patient
         if(!apps.empty())
             if (apps.peek().equals(latestAppointmentFile))
                 return;
-            this.latestAppointmentFile = latestAppointmentFile;
-            this.apps.push(latestAppointmentFile);
+            this.apps = chronoAdd(this.apps,latestAppointmentFile);
+            this.latestAppointmentFile = (String)apps.peek();
             appointment_counter++;
+    }
+
+    public Stack chronoAdd(Stack s, String ele)//adding chronologically
+    {
+        int start = ele.indexOf('-') - 2;//dd-mm-yyyy
+        String str[] = new String[s.size()];
+        MyDate date = new MyDate(ele.substring(start));
+        int ctr = 0;
+        for (int i = 0; i < s.size(); i++) {
+            str[ctr] = (String) s.peek();
+            MyDate date2 = new MyDate(str[ctr].substring(start));
+            if (date.isLaterThan(date2)) {
+                s.push(ele);
+                ctr--;
+                break;
+            } else {
+                s.pop();
+                ctr++;
+            }
+        }
+        for (int i = ctr; i >= 0; i--) {
+            if(s.isEmpty()) {
+                s.push(ele);
+                continue;
+            }
+            s.push(str[i]);
+        }
+        return s;
     }
 
     public void updateLatestAppointment(Appointment app)//after deletion of latest appointment

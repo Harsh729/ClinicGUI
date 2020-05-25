@@ -134,4 +134,9 @@ public class PatientTableWrapper
     public String getLatest() {
         return latest;
     }
+
+    public String getFileName()
+    {
+        return name+" "+phone;
+    }
 }

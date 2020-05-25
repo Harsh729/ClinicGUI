@@ -9,7 +9,7 @@ import java.io.IOException;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
-public class test extends Patient {
+public class test {
 
     public static void test(String[] args)throws IOException {
         Patient p1=new Patient("Name","1234567890");
@@ -17,7 +17,7 @@ public class test extends Patient {
         System.out.println(p1.getName());
 
         Slot t1=new Slot(0.5,16);
-        Appointment a1=new Appointment(p1,"12-1-2019",t1,0);
+        Appointment a1=new Appointment(p1,"12-01-2019",t1,0);
         Schedule s1=new Schedule("15-01-2019",0);
         s1.add(a1);
         s1.addBreak();
@@ -53,7 +53,7 @@ public class test extends Patient {
     public static void main(String args[])throws IOException
     {
         //Main asst = new Main();
-        fileTest();
+        chronoTest();
 
     }
 
@@ -68,6 +68,18 @@ public class test extends Patient {
         String line1[] = reader.readNext();
         String line2[] = reader.readNext();
         System.out.println(line1);
+    }
+
+    public static void chronoTest()
+    {
+        String date1 = "25-05-2020";
+        String date2 = "24-06-2019";
+        Patient p = new Patient("Name", "9879");
+        Slot s = new Slot(17);
+        Appointment a = new Appointment(p,date1,s,0);
+        System.out.println(p.getLatestAppointmentFile());
+        Appointment a2 = new Appointment(p,date2,s,0);
+        System.out.println(p.getLatestAppointmentFile());
     }
 
 }

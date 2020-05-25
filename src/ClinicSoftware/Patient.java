@@ -133,13 +133,17 @@ public class Patient
             if (apps.peek().equals(latestAppointmentFile))
                 return;
             this.apps = chronoAdd(this.apps,latestAppointmentFile);
-            this.latestAppointmentFile = (String)apps.peek();
-            appointment_counter++;
+            if(!apps.isEmpty()) {
+                this.latestAppointmentFile = (String) apps.peek();
+                appointment_counter++;
+            }
     }
 
     public Stack chronoAdd(Stack s, String ele)//adding chronologically
     {
         int start = ele.indexOf('-') - 2;//dd-mm-yyyy
+        if(start == -3)
+            return s;
         String str[] = new String[s.size()];
         MyDate date = new MyDate(ele.substring(start));
         int ctr = 0;

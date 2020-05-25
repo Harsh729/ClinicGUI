@@ -46,24 +46,27 @@ public class PrescriptionFile extends ClinicFile
 
     public Exception createFile(Prescription prescription)
     {
-        try {
-            FileWriter fw = new FileWriter(dir + prescriptionFolder + prescription.getPatientName() + " " + prescription.getDate() + ".csv");
-            CSVWriter writer = new CSVWriter(fw);
-            String preHeader[]={prescription.getPatientName(),prescription.getDate()};
-            writer.writeNext(preHeader);
-            writer.writeNext(prescriptionHeader);
-            for (int i = 0; i < prescription.getMedicines().size(); i++) {
+        if(createCount==0) {
+            try {
+                FileWriter fw = new FileWriter(dir + prescriptionFolder + prescription.getPatientName() + " " + prescription.getDate() + ".csv");
+                CSVWriter writer = new CSVWriter(fw);
+                String preHeader[] = {prescription.getPatientName(), prescription.getDate()};
+                writer.writeNext(preHeader);
+                writer.writeNext(prescriptionHeader);
+                for (int i = 0; i < prescription.getMedicines().size(); i++) {
 
-                String temp[]= {prescription.getMedicines().get(i), prescription.getInstruction().get(i)};
-                writer.writeNext(temp);
+                    String temp[] = {prescription.getMedicines().get(i), prescription.getInstruction().get(i)};
+                    writer.writeNext(temp);
+                }
+                writer.close();
+                fw.close();
+            } catch (Exception e) {
+                return e;
             }
-            writer.close();
-            fw.close();
+            createCount++;
         }
-        catch(Exception e)
-        {
-            return e;
-        }
+        else
+            System.out.println("Already created: PrF");
         return null;
     }
 
@@ -100,6 +103,7 @@ public class PrescriptionFile extends ClinicFile
 
     public boolean deleteFile() {
         File file = new File(dir + prescriptionFolder + fileName + ".csv");
+        createCount = 0;
         return file.delete();
     }
 
@@ -131,6 +135,7 @@ public class PrescriptionFile extends ClinicFile
         catch(Exception e) {
             return e;
         }
+        createCount = 0;
         return null;
     }
 
@@ -182,6 +187,7 @@ public class PrescriptionFile extends ClinicFile
         {
            return e;
         }
+        createCount = 0;
         return null;
     }
 
@@ -193,6 +199,7 @@ public class PrescriptionFile extends ClinicFile
             return exception;
         if(!((exception=addEntry(medEnter,instructionEnter,index))==null))
             return exception;
+        createCount = 0;
         return null;
     }
 

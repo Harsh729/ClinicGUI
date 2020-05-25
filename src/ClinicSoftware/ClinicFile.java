@@ -5,6 +5,7 @@ import java.io.*;
 public class ClinicFile {
     String dir = "";
     int userSignature = 0;
+    int createCount = 0;
     ClinicFile(int userSignature)
     {
         this.userSignature = userSignature;

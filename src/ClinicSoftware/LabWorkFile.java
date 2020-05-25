@@ -46,19 +46,22 @@ public class LabWorkFile extends ClinicFile
 
     public Exception createLabFile(LabWork lab)
     {
-        try {
-            FileWriter fw = new FileWriter(dir + labFolder + lab.getPatientName() + " " + lab.getSentDate() + ".csv");
-            CSVWriter writer = new CSVWriter(fw);
-            writer.writeNext(labHeader);
-            String labDetails[] = {lab.getPatientName(), lab.getSentDate(), lab.getReceivedDate(), lab.getLabName(), lab.getWork()};
-            writer.writeNext(labDetails);
-            writer.close();
-            fw.close();
+        if(createCount==0) {
+            try {
+                FileWriter fw = new FileWriter(dir + labFolder + lab.getPatientName() + " " + lab.getSentDate() + ".csv");
+                CSVWriter writer = new CSVWriter(fw);
+                writer.writeNext(labHeader);
+                String labDetails[] = {lab.getPatientName(), lab.getSentDate(), lab.getReceivedDate(), lab.getLabName(), lab.getWork()};
+                writer.writeNext(labDetails);
+                writer.close();
+                fw.close();
+            } catch (Exception e) {
+                return e;
+            }
+            createCount++;
         }
-        catch(Exception e)
-        {
-            return e;
-        }
+        else
+            System.out.println("Already created: LF");
         return null;
     }
 
@@ -97,6 +100,7 @@ public class LabWorkFile extends ClinicFile
     public boolean deleteFile()
     {
         File file =new File(dir+labFolder+fileName+".csv");
+        createCount = 0;
         return file.delete();
     }
 
@@ -124,6 +128,7 @@ public class LabWorkFile extends ClinicFile
         {
             return e;
         }
+        createCount = 0;
         return null;
     }
 

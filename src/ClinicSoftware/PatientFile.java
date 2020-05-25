@@ -29,19 +29,24 @@ public class PatientFile extends ClinicFile {
     }
 
     public Exception createFile(Patient patient) {
-        try {
-            FileWriter fw = new FileWriter(dir + folderName + patient.getFileName() + ".csv");
-            CSVWriter writer = new CSVWriter(fw);
-            writer.writeNext(header);
-            String[] recordDetails = {patient.getName(), "" + patient.getPhone(), "" + patient.getAge(), patient.getFirstAppointmentFile(), patient.getLatestAppointmentFile(), patient.getDesc(), patient.getMoney() + "", patient.getHeartCondition() + "", patient.getAllergy() + "", patient.getDiabetes() + "", patient.getBloodPressure() + "", patient.getPaid() + "", patient.getAppointmentCounter() + ""};
-            writer.writeNext(recordDetails);
-            String apps[] = toStringArray(patient.getApps());
-            writer.writeNext(apps);
-            writer.close();
-            fw.close();
-        } catch (Exception e) {
-            return e;
+        if(createCount==0) {
+            try {
+                FileWriter fw = new FileWriter(dir + folderName + patient.getFileName() + ".csv");
+                CSVWriter writer = new CSVWriter(fw);
+                writer.writeNext(header);
+                String[] recordDetails = {patient.getName(), "" + patient.getPhone(), "" + patient.getAge(), patient.getFirstAppointmentFile(), patient.getLatestAppointmentFile(), patient.getDesc(), patient.getMoney() + "", patient.getHeartCondition() + "", patient.getAllergy() + "", patient.getDiabetes() + "", patient.getBloodPressure() + "", patient.getPaid() + "", patient.getAppointmentCounter() + ""};
+                writer.writeNext(recordDetails);
+                String apps[] = toStringArray(patient.getApps());
+                writer.writeNext(apps);
+                writer.close();
+                fw.close();
+            } catch (Exception e) {
+                return e;
+            }
+            createCount++;
         }
+        else
+            System.out.println("Already created: PF");
         return null;
     }
 
@@ -111,6 +116,7 @@ public class PatientFile extends ClinicFile {
     public boolean deleteFile()
     {
         File file = new File(dir+folderName + fileName + ".csv");
+        createCount = 0;
         return file.delete();
     }
 
@@ -139,6 +145,7 @@ public class PatientFile extends ClinicFile {
         {
             return e;
         }
+        createCount = 0;
         return null;
     }
 

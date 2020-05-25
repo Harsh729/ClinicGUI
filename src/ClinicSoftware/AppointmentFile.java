@@ -28,19 +28,22 @@ public class AppointmentFile extends ClinicFile{
     }
 
     public Exception createFile(Appointment a) {
-        try {
-            FileWriter fw = new FileWriter(dir + folderName + a.getFileName() + ".csv");
-            CSVWriter writer = new CSVWriter(fw);
-            writer.writeNext(header);
-            String[] dat = {a.getRecord().getFileName(), a.getDate(), a.getProcedure(), "" + a.getPrice(), a.getLabFileName(),a.getTime().displaySlot(), a.getPrescriptionFileName(),a.getPaid()+"",a.getUserSignature()+""};
-            writer.writeNext(dat);
-            writer.close();
-            fw.close();
+        if(createCount==0) {
+            try {
+                FileWriter fw = new FileWriter(dir + folderName + a.getFileName() + ".csv");
+                CSVWriter writer = new CSVWriter(fw);
+                writer.writeNext(header);
+                String[] dat = {a.getRecord().getFileName(), a.getDate(), a.getProcedure(), "" + a.getPrice(), a.getLabFileName(), a.getTime().displaySlot(), a.getPrescriptionFileName(), a.getPaid() + "", a.getUserSignature() + ""};
+                writer.writeNext(dat);
+                writer.close();
+                fw.close();
+            } catch (Exception e) {
+                return e;
+            }
+            createCount++;
         }
-        catch(Exception e)
-        {
-            return e;
-        }
+        else
+            System.out.println("Already created: AF");
         return null;
     }
 
@@ -80,6 +83,7 @@ public class AppointmentFile extends ClinicFile{
 
     public boolean delete() {
         File file = new File(dir + folderName + fileName + ".csv");
+        createCount = 0;
         return file.delete();
     }
 
@@ -108,6 +112,7 @@ public class AppointmentFile extends ClinicFile{
         {
             return e;
         }
+        createCount = 0;
         return null;
     }
 

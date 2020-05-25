@@ -37,21 +37,24 @@ public class ScheduleFile extends ClinicFile {
     }
 
     public Exception createFile(Schedule s) {
-        try {
-            FileWriter fw = new FileWriter(dir + folderName + s.getDate() + ".csv");
-            CSVWriter writer = new CSVWriter(fw);
-            writer.writeNext(header);
-            for (int i = 0; i < s.getSlots().size(); i++) {
-                String entry[] = {s.getSlots().get(i).displaySlot(), s.getAppointments().get(i).getFileName()};
-                writer.writeNext(entry);
+        if(createCount==0) {
+            try {
+                FileWriter fw = new FileWriter(dir + folderName + s.getDate() + ".csv");
+                CSVWriter writer = new CSVWriter(fw);
+                writer.writeNext(header);
+                for (int i = 0; i < s.getSlots().size(); i++) {
+                    String entry[] = {s.getSlots().get(i).displaySlot(), s.getAppointments().get(i).getFileName()};
+                    writer.writeNext(entry);
+                }
+                writer.close();
+                fw.close();
+            } catch (Exception e) {
+                return e;
             }
-            writer.close();
-            fw.close();
+            createCount++;
         }
-        catch(Exception e)
-        {
-            return e;
-        }
+        else
+            System.out.println("Already created: SF");
         return null;
     }
 
@@ -93,6 +96,7 @@ public class ScheduleFile extends ClinicFile {
 
     public boolean deleteFile() {
         File file = new File(dir + folderName + fileName + ".csv");
+        createCount = 0;
         return file.delete();
     }
 
@@ -130,6 +134,7 @@ public class ScheduleFile extends ClinicFile {
         } catch (Exception e) {
             return e;
         }
+        createCount = 0;
         return null;
     }
 
@@ -182,6 +187,7 @@ public class ScheduleFile extends ClinicFile {
         {
             return e;
         }
+        createCount = 0;
         return null;
     }
 
@@ -193,6 +199,7 @@ public class ScheduleFile extends ClinicFile {
             if((e=addEntry(newAppointment))==null)
             {
                 newAppointment.setTime(slot);
+                createCount = 0;
                 return e;
             }
             else
@@ -209,6 +216,7 @@ public class ScheduleFile extends ClinicFile {
         if((e=deleteEntry(schedule.searchSlot(a)))==null)
             if((e=addEntry(a))==null)
             {
+                createCount = 0;
                 return e;
             }
             else

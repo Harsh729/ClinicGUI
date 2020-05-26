@@ -36,7 +36,7 @@ public class PatientFile extends ClinicFile {
                 writer.writeNext(header);
                 String[] recordDetails = {patient.getName(), "" + patient.getPhone(), "" + patient.getAge(), patient.getFirstAppointmentFile(), patient.getLatestAppointmentFile(), patient.getDesc(), patient.getMoney() + "", patient.getHeartCondition() + "", patient.getAllergy() + "", patient.getDiabetes() + "", patient.getBloodPressure() + "", patient.getPaid() + "", patient.getAppointmentCounter() + ""};
                 writer.writeNext(recordDetails);
-                String apps[] = toStringArray(patient.getApps());
+                String apps[] = toStringArray(patient.getAppointmentStack());
                 writer.writeNext(apps);
                 writer.close();
                 fw.close();
@@ -75,7 +75,7 @@ public class PatientFile extends ClinicFile {
                 String apps[] = reader.readNext();
                 if (apps != null) {
                     Stack app = toStack(apps);
-                    r.setApps(app);
+                    r.setAppointment_stack(app);
                 }
             }
             return r;
@@ -105,8 +105,14 @@ public class PatientFile extends ClinicFile {
         String str[] = new String[s.size()];
         for(int i=s.size()-1;i>=0;i--)
         {
-            if(!s.empty())
-                str[i] = s.pop().toString();
+            if(!s.empty()) {
+                try {
+                    str[i] = s.pop().toString();
+                } catch(NullPointerException e)
+                {
+                    e.printStackTrace();
+                }
+            }
             else
                 break;
         }

@@ -23,7 +23,7 @@ public class Patient
     private Appointment latestAppointment;
     private boolean appointmentsBuiltFlag=false;
     private int appointment_counter = 0;
-    private Stack apps = new Stack<String>();
+    private Stack appointment_stack = new Stack<String>();
 
     public Patient(String name, String phone, String firstAppointmentFile, int age, String description, String latestAppointmentFile, boolean heart_condition, boolean allergy, boolean blood_pressure, boolean diabetes, int app_ctr)
     {
@@ -119,22 +119,23 @@ public class Patient
         return appointment_counter;
     }
 
-    public void setApps(Stack apps) {
-        this.apps = apps;
+    public void setAppointment_stack(Stack appointment_stack) {
+        this.appointment_stack = appointment_stack;
     }
 
-    public Stack getApps() {
-        return apps;
+    public Stack getAppointmentStack() {
+        return appointment_stack;
     }
 
     public void setLatestAppointmentFile(String latestAppointmentFile)
     {
-        if(!apps.empty())
-            if (apps.peek().equals(latestAppointmentFile))
+        if(!appointment_stack.empty())
+            if (appointment_stack.peek().equals(latestAppointmentFile))
                 return;
-            this.apps = chronoAdd(this.apps,latestAppointmentFile);
-            if(!apps.isEmpty()) {
-                this.latestAppointmentFile = (String) apps.peek();
+            this.appointment_stack = chronoAdd(this.appointment_stack,latestAppointmentFile);
+            if(!appointment_stack.isEmpty()) {
+                this.latestAppointmentFile = (String) appointment_stack.peek();
+                this.setFirstAppointmentFile((String) appointment_stack.get(0));
                 appointment_counter++;
             }
     }
@@ -163,11 +164,12 @@ public class Patient
         for (int i = 0; i < s.size(); i++) {
             str[ctr] = (String) s.peek();
             MyDate date2 = new MyDate(str[ctr].substring(start));
-            if (date.isLaterThan(date2)) {
+            if (date.isLaterThan(date2) && ele!=null) {
                 s.push(ele);
                 ctr--;
                 break;
-            } else {
+            }
+            else {
                 s.pop();
                 ctr++;
             }
@@ -177,6 +179,7 @@ public class Patient
                 s.push(ele);
                 continue;
             }
+            if(str[i] != null && !str[i].equals(s.peek()))
             s.push(str[i]);
         }
         return s;
@@ -184,12 +187,12 @@ public class Patient
 
     public void updateLatestAppointment(Appointment app)//after deletion of latest appointment
     {
-        if(!this.apps.empty()) {
-            if (this.apps.peek().equals(app.getFileName())) {
-                apps.pop();
+        if(!this.appointment_stack.empty()) {
+            if (this.appointment_stack.peek().equals(app.getFileName())) {
+                appointment_stack.pop();
                 appointment_counter--;
-                if(!apps.isEmpty())
-                    latestAppointmentFile = (String) apps.peek();
+                if(!appointment_stack.isEmpty())
+                    latestAppointmentFile = (String) appointment_stack.peek();
                 else
                 {
                     if(appointment_counter!=0)
@@ -198,7 +201,7 @@ public class Patient
                     firstAppointmentFile = null;
                 }
             } else {
-                apps.remove(app);
+                appointment_stack.remove(app);
             }
             this.updatePatient();
         }
@@ -327,8 +330,12 @@ public class Patient
     }
 
     public void updatePatient()
-    {
+    {//TODO: debug this. Exception is prob not null.
         PatientFile file=new PatientFile(this);
-        file.createFile(this);
+        Exception e = file.createFile(this);
+        if(e!=null)
+            e.printStackTrace();
+        else
+            System.out.println("No exception at updatePatient");
     }
 }

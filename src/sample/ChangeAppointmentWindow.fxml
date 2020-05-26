@@ -34,8 +34,8 @@
                             <buttons>
                                 <HBox fx:id="buttonBox" spacing="10.0">
                                     <children>
-                                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
-                                        <Button fx:id="acceptButton" mnemonicParsing="false" onAction="#save" text="OK" />
+                                        <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+                                        <Button fx:id="acceptButton" defaultButton="true" mnemonicParsing="false" onAction="#save" text="OK" />
                                     </children>
                                     <padding>
                                         <Insets left="5.0" right="5.0" top="5.0" />

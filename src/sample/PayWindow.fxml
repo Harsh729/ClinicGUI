@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PayWindowController">
    <children>
       <Label layoutX="186.0" layoutY="14.0" text="Pay" />
@@ -15,8 +14,8 @@
       <TextField fx:id="AmountTextField" layoutX="97.0" layoutY="76.0" />
       <ButtonBar layoutY="160.0" prefHeight="40.0" prefWidth="400.0">
         <buttons>
-          <Button fx:id="CancelButton" mnemonicParsing="false" onAction="#closeWindow" text="Cancel" />
-            <Button fx:id="OKButton" mnemonicParsing="false" onAction="#save" text="OK" />
+          <Button fx:id="CancelButton" cancelButton="true" mnemonicParsing="false" onAction="#closeWindow" text="Cancel" />
+            <Button fx:id="OKButton" defaultButton="true" mnemonicParsing="false" onAction="#save" text="OK" />
         </buttons>
          <padding>
             <Insets right="10.0" />

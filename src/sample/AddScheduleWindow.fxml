@@ -47,12 +47,12 @@
             <Button fx:id="CreateRecordButton" mnemonicParsing="false" onAction="#createRecord" text="+Patient" />
             <Button fx:id="CreateLabWorkButton" mnemonicParsing="false" onAction="#createLabWork" text="+LabWork" />
             <Button fx:id="CreatePrescriptionButton" mnemonicParsing="false" onAction="#createPrescription" text="+Prescription" />
-                      <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancel" text="Cancel">
+                      <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancel" text="Cancel">
                <HBox.margin>
                   <Insets left="40.0" />
                </HBox.margin>
             </Button>
-                      <Button fx:id="acceptButton" mnemonicParsing="false" onAction="#save" text="OK" />
+                      <Button fx:id="acceptButton" defaultButton="true" mnemonicParsing="false" onAction="#save" text="OK" />
                   </children>
                   <padding>
                       <Insets left="5.0" right="5.0" top="10.0" />

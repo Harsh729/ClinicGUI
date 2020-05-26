@@ -14,8 +14,8 @@
    <children>
       <ButtonBar layoutY="335.0" prefHeight="40.0" prefWidth="400.0">
         <buttons>
-          <Button fx:id="CancelButton" mnemonicParsing="false" onAction="#closeWindow" text="Cancel" />
-            <Button fx:id="OKButton" mnemonicParsing="false" onAction="#save" text="OK" />
+          <Button fx:id="CancelButton" cancelButton="true" mnemonicParsing="false" onAction="#closeWindow" text="Cancel" />
+            <Button fx:id="OKButton" defaultButton="true" mnemonicParsing="false" onAction="#save" text="OK" />
         </buttons>
          <padding>
             <Insets left="10.0" right="10.0" />

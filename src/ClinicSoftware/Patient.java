@@ -153,7 +153,7 @@ public class Patient
     }
 
     public Stack chronoAdd(Stack s, String ele)//adding chronologically
-    {
+    {//TODO: debug when not in chronological order
         int start = ele.indexOf('-') - 2;//dd-mm-yyyy
         if(start == -3)
             return s;
@@ -188,7 +188,15 @@ public class Patient
             if (this.apps.peek().equals(app.getFileName())) {
                 apps.pop();
                 appointment_counter--;
-                latestAppointmentFile = (String) apps.peek();
+                if(!apps.isEmpty())
+                    latestAppointmentFile = (String) apps.peek();
+                else
+                {
+                    if(appointment_counter!=0)
+                        System.out.println("stack problem ln 196");
+                    latestAppointmentFile = null;
+                    firstAppointmentFile = null;
+                }
             } else {
                 apps.remove(app);
             }

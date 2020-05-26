@@ -65,7 +65,7 @@ public class PatientTableWrapper
     {
         this.patient = patient;
         try {
-            latest = patient.getLatestAppointment().getDate();
+            latest = Patient.getDateFromAppointment(patient.getLatestAppointmentFile());
         }
         catch (NullPointerException e)
         {

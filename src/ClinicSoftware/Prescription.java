@@ -5,14 +5,14 @@ public class Prescription
 {
     private String date,patientName;
     private LinkedList<String> medicines;
-    private LinkedList<String> instruction;
+    private LinkedList<String> instructions;
 
     public Prescription(String patientName,String date)
     {
         this.date=date;
         this.patientName=patientName;
         medicines=new LinkedList<>();
-        instruction=new LinkedList<>();
+        instructions =new LinkedList<>();
     }
 
     public Prescription()
@@ -34,9 +34,9 @@ public class Prescription
         return medicines;
     }
 
-    public LinkedList<String> getInstruction()
+    public LinkedList<String> getInstructions()
     {
-        return instruction;
+        return instructions;
     }
 
     public void setDate(String date)
@@ -53,7 +53,7 @@ public class Prescription
 
     public void addInstruction(String instruction)
     {
-        this.instruction.add(instruction);
+        this.instructions.add(instruction);
     }
 
     public void addMedicineEntry(String medicine,String instruction)
@@ -66,7 +66,7 @@ public class Prescription
     {
         int index=medicines.indexOf(medicine);
         medicines.remove(medicine);
-        instruction.remove(index);
+        instructions.remove(index);
     }
 
     public void display()
@@ -76,7 +76,7 @@ public class Prescription
         System.out.println("Date: "+getDate());
         System.out.println("Medicines\t\tInstruction");
         for(int a=0;a<getMedicines().size();a++)
-            System.out.println(getMedicines().get(a)+"\t\t"+getInstruction().get(a));
+            System.out.println(getMedicines().get(a)+"\t\t"+ getInstructions().get(a));
     }
 
 

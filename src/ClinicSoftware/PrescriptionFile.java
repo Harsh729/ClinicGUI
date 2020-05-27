@@ -55,7 +55,7 @@ public class PrescriptionFile extends ClinicFile
                 writer.writeNext(prescriptionHeader);
                 for (int i = 0; i < prescription.getMedicines().size(); i++) {
 
-                    String temp[] = {prescription.getMedicines().get(i), prescription.getInstruction().get(i)};
+                    String temp[] = {prescription.getMedicines().get(i), prescription.getInstructions().get(i)};
                     writer.writeNext(temp);
                 }
                 writer.close();

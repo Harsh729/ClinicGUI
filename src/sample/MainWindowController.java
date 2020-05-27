@@ -200,6 +200,8 @@ public class MainWindowController implements Initializable {
 
             ScheduleTable.setItems(data);
 
+            initializeButtons();
+
     }
 
     public void initializePatientTable()
@@ -278,6 +280,14 @@ public class MainWindowController implements Initializable {
 
     }
 
+    public void initializeButtons()
+    {
+        DeleteScheduleEntryButton.setDisable(true);
+        ChangeAppointmentButton.setDisable(true);
+        ChangeSlotButton.setDisable(true);
+        PayButton.setDisable(true);
+    }
+
     public Schedule schedule;
     public static int userSignature;
 
@@ -328,6 +338,9 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private DatePicker ScheduleDatePicker;
+
+    @FXML
+    private Button DeleteScheduleEntryButton;
 
     @FXML
     private Button ChangeAppointmentButton;
@@ -423,6 +436,17 @@ public class MainWindowController implements Initializable {
             e.printStackTrace();
         }
         //System.out.println("Reach");
+    }
+
+    @FXML
+    public void checkIfSelected()
+    {
+        if(!ScheduleTable.getSelectionModel().isEmpty()) {
+            DeleteScheduleEntryButton.setDisable(false);
+            ChangeSlotButton.setDisable(false);
+            ChangeAppointmentButton.setDisable(false);
+            PayButton.setDisable(false);
+        }
     }
 
     @FXML

@@ -540,6 +540,7 @@ public class MainWindowController implements Initializable {
     @FXML
     void createLabWork(){
         CreateLabWorkMain obj=new CreateLabWorkMain();
+        obj.setMainWindowController(this);
         Stage stage=new Stage();
         obj.start(stage);
     }
@@ -604,7 +605,7 @@ public class MainWindowController implements Initializable {
         System.out.println("Test successful");
     }
 
-    public static void openLabWorkReminderWindow()
+    public static void doLabWorkReminder()
     {
         LabWorkReminderController obj = new LabWorkReminderController();
         MyDate today = new MyDate();
@@ -620,13 +621,13 @@ public class MainWindowController implements Initializable {
                     obj.addLabWorkToList(lb);
             }
         }
-        try {
-            LabWorkReminderMain obj2 = new LabWorkReminderMain();
-            obj2.start(new Stage());
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
+        if(!obj.isListEmpty()) {
+            try {
+                LabWorkReminderMain obj2 = new LabWorkReminderMain();
+                obj2.start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

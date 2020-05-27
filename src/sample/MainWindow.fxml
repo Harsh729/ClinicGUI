@@ -159,6 +159,14 @@
                                                 <Font name="System Bold" size="21.0" />
                                              </font>
                                           </Button>
+                                          <Button fx:id="PrescriptionDetailsButton" mnemonicParsing="false" onAction="#openPrescriptionDetailsWindow" prefWidth="100.0" text="Details">
+                                             <font>
+                                                <Font name="System Bold" size="21.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets top="10.0" />
+                                             </HBox.margin>
+                                          </Button>
                                           <Button fx:id="AddPrescriptionButton" mnemonicParsing="false" onAction="#createPrescription" prefWidth="100.0" text="Add">
                                              <font>
                                                 <Font name="System Bold" size="21.0" />

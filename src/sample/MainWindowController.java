@@ -300,6 +300,7 @@ public class MainWindowController implements Initializable {
         DeletePatientButton.setDisable(true);
         DeletePrescriptionButton.setDisable(true);
         DisplayPatientDetailsButton.setDisable(true);
+        PrescriptionDetailsButton.setDisable(true);
     }
 
     public Schedule schedule;
@@ -399,6 +400,9 @@ public class MainWindowController implements Initializable {
     private Button DisplayPatientDetailsButton;
 
     @FXML
+    private Button PrescriptionDetailsButton;
+
+    @FXML
     private TableView PatientTable;
 
     @FXML
@@ -495,6 +499,7 @@ public class MainWindowController implements Initializable {
     {
         if(!PrescriptionsTable.getSelectionModel().isEmpty()){
             DeletePrescriptionButton.setDisable(false);
+            PrescriptionDetailsButton.setDisable(false);
         }
     }
 

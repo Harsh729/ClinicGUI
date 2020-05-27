@@ -23,6 +23,8 @@ public class LabWorkFile extends ClinicFile
         fileName=labWork.getFileName();
         if(!isFilePresent(dir,labFolder,fileName))
             System.out.println(createFileWithMessage(labWork));
+        else
+            System.out.println("LF: exists");
     }
 
     public String getDirectory()
@@ -101,6 +103,7 @@ public class LabWorkFile extends ClinicFile
     {
         File file =new File(dir+labFolder+fileName+".csv");
         createCount = 0;
+        System.gc();
         return file.delete();
     }
 

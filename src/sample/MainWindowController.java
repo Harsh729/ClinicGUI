@@ -575,7 +575,7 @@ public class MainWindowController implements Initializable {
     @FXML
     void deleteLabWork(){
         LabWork selected = (LabWork)LabWorkTable.getSelectionModel().getSelectedItem();
-        LabWorkFile file = new LabWorkFile(selected);//file to be deleted
+        LabWorkFile file = new LabWorkFile(selected.getFileName());//file to be deleted
         if(file.deleteFile())
             System.out.println("File Deleted Successfully");
         initializeLabWorkTable();

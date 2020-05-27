@@ -11,12 +11,18 @@ public class SingleScheduleEntry {
 
     public SingleScheduleEntry(Appointment appointment)
     {
-        this.slot=appointment.getTime();
-        this.appointment=appointment;
-        appointment.setTime(slot);
-        time=slot.newFormat();
-        patientName=appointment.getRecord().getName();
-        description=appointment.getProcedure();
+        try {
+            this.slot = appointment.getTime();
+            this.appointment = appointment;
+            appointment.setTime(slot);
+            time = slot.newFormat();
+            patientName = appointment.getRecord().getName();
+            description = appointment.getProcedure();
+        }
+        catch(NullPointerException e)
+        {
+            System.out.println("Null Pointer Exception at SSE constructor");
+        }
     }
 
     public void setTime(String time) {

@@ -143,7 +143,7 @@
                                     <items>
                                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                             <children>
-                                                <TableView fx:id="ScheduleTable" editable="true" prefHeight="516.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                <TableView fx:id="ScheduleTable" editable="true" onMouseClicked="#checkIfSelected" prefHeight="516.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                             </children>
                                         </AnchorPane>
                                         <AnchorPane maxHeight="63.0" prefHeight="105.0" prefWidth="670.0" SplitPane.resizableWithParent="false">
@@ -177,7 +177,7 @@
                                           <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#deleteScheduleEntry" prefHeight="37.0" prefWidth="135.0" text="Delete">
+                                    <Button fx:id="DeleteScheduleEntryButton" disable="true" mnemonicParsing="false" onAction="#deleteScheduleEntry" prefHeight="37.0" prefWidth="135.0" text="Delete">
                                        <font>
                                           <Font name="System Bold" size="16.0" />
                                        </font>

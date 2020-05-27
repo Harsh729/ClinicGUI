@@ -99,6 +99,8 @@ public class MainWindowController implements Initializable {
 
             }
             LabWorkTable.setItems(data);
+
+            initializeButtons();
         }
         catch(Exception e)
         {
@@ -140,6 +142,8 @@ public class MainWindowController implements Initializable {
 
             }
             PrescriptionsTable.setItems(data);
+
+            initializeButtons();
         }
         catch(Exception e)
         {
@@ -200,7 +204,7 @@ public class MainWindowController implements Initializable {
 
             ScheduleTable.setItems(data);
 
-            initializeButtons();
+            initializeScheduleButtons();
 
     }
 
@@ -278,14 +282,24 @@ public class MainWindowController implements Initializable {
         diabetes.setMaxWidth(60);
         PatientTable.setItems(data2);
 
+        initializeButtons();
+
     }
 
-    public void initializeButtons()
+    public void initializeScheduleButtons()
     {
         DeleteScheduleEntryButton.setDisable(true);
         ChangeAppointmentButton.setDisable(true);
         ChangeSlotButton.setDisable(true);
         PayButton.setDisable(true);
+    }
+
+    public void initializeButtons()
+    {
+        DeleteLabWorkButton.setDisable(true);
+        DeletePatientButton.setDisable(true);
+        DeletePrescriptionButton.setDisable(true);
+        DisplayPatientDetailsButton.setDisable(true);
     }
 
     public Schedule schedule;
@@ -332,6 +346,12 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private Button DeleteLabWorkButton;
+
+    @FXML
+    private Button DeletePrescriptionButton;
+
+    @FXML
+    private Button DeletePatientButton;
 
     @FXML
     private AnchorPane ScheduleAnchorPane;
@@ -442,13 +462,38 @@ public class MainWindowController implements Initializable {
     }
 
     @FXML
-    public void checkIfSelected()
+    public void checkIfSelectedSchedule()
     {
         if(!ScheduleTable.getSelectionModel().isEmpty()) {
             DeleteScheduleEntryButton.setDisable(false);
             ChangeSlotButton.setDisable(false);
             ChangeAppointmentButton.setDisable(false);
             PayButton.setDisable(false);
+        }
+    }
+
+    @FXML
+    public void checkIfSelectedPatient()
+    {
+        if(!PatientTable.getSelectionModel().isEmpty()){
+            DeletePatientButton.setDisable(false);
+            DisplayPatientDetailsButton.setDisable(false);
+        }
+    }
+
+    @FXML
+    public void checkIfSelectedPrescription()
+    {
+        if(!PrescriptionsTable.getSelectionModel().isEmpty()){
+            DeletePrescriptionButton.setDisable(false);
+        }
+    }
+
+    @FXML
+    public void checkIfSelectedLabWork()
+    {
+        if(!LabWorkTable.getSelectionModel().isEmpty()){
+            DeleteLabWorkButton.setDisable(false);
         }
     }
 
@@ -552,7 +597,7 @@ public class MainWindowController implements Initializable {
     }
 
     @FXML
-    public void createRecord(){
+    public void createPatient(){
         try {
             CreatePatientMain obj = new CreatePatientMain();
             Stage stage = new Stage();
@@ -562,6 +607,16 @@ public class MainWindowController implements Initializable {
         {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void deletePatient()
+    {
+        PatientTableWrapper wrap = (PatientTableWrapper)PatientTable.getSelectionModel().getSelectedItem();
+        PatientFile file = new PatientFile(wrap.getFileName());
+        if(file.deleteFile())
+            System.out.println("File deleted successfully");
+        initializePatientTable();
     }
 
     @FXML
@@ -586,6 +641,17 @@ public class MainWindowController implements Initializable {
         CreatePrescriptionMain obj=new CreatePrescriptionMain();
         Stage stage=new Stage();
         obj.start(stage);
+    }
+
+    @FXML
+    void deletePrescription(){
+        Prescription selected = (Prescription)PrescriptionsTable.getSelectionModel().getSelectedItem();
+        PrescriptionFile file = new PrescriptionFile(selected.getFileName());
+        if(file.deleteFile())
+        {
+            System.out.println("File deleted successfully");
+        }
+        initializePrescriptionTable();
     }
 
     @FXML

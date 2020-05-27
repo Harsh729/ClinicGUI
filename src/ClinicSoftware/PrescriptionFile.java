@@ -104,6 +104,7 @@ public class PrescriptionFile extends ClinicFile
     public boolean deleteFile() {
         File file = new File(dir + prescriptionFolder + fileName + ".csv");
         createCount = 0;
+        System.gc();
         return file.delete();
     }
 

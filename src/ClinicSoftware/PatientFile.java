@@ -123,6 +123,7 @@ public class PatientFile extends ClinicFile {
     {
         File file = new File(dir+folderName + fileName + ".csv");
         createCount = 0;
+        System.gc();
         return file.delete();
     }
 

@@ -19,23 +19,16 @@ public class LabWorkReminderController implements Initializable {
     @FXML
     private TableView labWorkReminderTable;
 
-    @FXML
-    private TableColumn sentDateColumn;
-
-    @FXML
-    private TableColumn patientNameColumn;
-
-    @FXML
-    private TableColumn labNameColumn;
-
-    @FXML
-    private TableColumn workColumn;
-
     private static ObservableList<LabWork> labWorkList = FXCollections.observableArrayList();
 
     public void addLabWorkToList(LabWork labWork)
     {
         labWorkList.add(labWork);
+    }
+
+    public boolean isListEmpty()
+    {
+        return labWorkList.isEmpty();
     }
 
     @Override
@@ -47,11 +40,13 @@ public class LabWorkReminderController implements Initializable {
 
     public void initializeTable()
     {
-        this.sentDateColumn = new TableColumn("Sent Date");
-        this.patientNameColumn = new TableColumn("Patient Name");
-        this.labNameColumn = new TableColumn("Lab Name");
-        this.workColumn = new TableColumn("Work");
+        TableColumn sentDateColumn = new TableColumn("Sent Date");
+        TableColumn patientNameColumn = new TableColumn("Patient Name");
+        TableColumn labNameColumn = new TableColumn("Lab Name");
+        TableColumn workColumn = new TableColumn("Work");
+
         this.labWorkReminderTable.getColumns().addAll(sentDateColumn,patientNameColumn,labNameColumn,workColumn);
+
         //setting values to cells:
         sentDateColumn.setCellValueFactory(new PropertyValueFactory<LabWork,String>("sentDate"));
         patientNameColumn.setCellValueFactory(new PropertyValueFactory<LabWork,String>("patientName"));

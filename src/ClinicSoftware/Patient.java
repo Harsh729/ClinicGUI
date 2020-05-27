@@ -129,15 +129,20 @@ public class Patient
 
     public void setLatestAppointmentFile(String latestAppointmentFile)
     {
+        this.latestAppointmentFile = latestAppointmentFile;
+    }
+
+    public void addAppointment(String appointmentFile)
+    {
         if(!appointment_stack.empty())
-            if (appointment_stack.peek().equals(latestAppointmentFile))
+            if (appointment_stack.peek().equals(appointmentFile))
                 return;
-            this.appointment_stack = chronoAdd(this.appointment_stack,latestAppointmentFile);
-            if(!appointment_stack.isEmpty()) {
-                this.latestAppointmentFile = (String) appointment_stack.peek();
-                this.setFirstAppointmentFile((String) appointment_stack.get(0));
-                appointment_counter++;
-            }
+        this.appointment_stack = chronoAdd(this.appointment_stack,appointmentFile);
+        if(!appointment_stack.isEmpty()) {
+            this.setLatestAppointmentFile((String) appointment_stack.peek());
+            this.setFirstAppointmentFile((String) appointment_stack.get(0));
+            appointment_counter++;
+        }
     }
 
     public static String getDateFromAppointment(String file)
@@ -154,14 +159,15 @@ public class Patient
     }
 
     public Stack chronoAdd(Stack s, String ele)//adding chronologically
-    {//TODO: debug when not in chronological order
-        int start = ele.indexOf('-') - 2;//dd-mm-yyyy
-        if(start == -3)
+    {
+        int start = ele.lastIndexOf('-') - 5;//dd-mm-yyyy
+        if(start == -6)
             return s;
         String str[] = new String[s.size()];
         MyDate date = new MyDate(ele.substring(start));
         int ctr = 0;
-        for (int i = 0; i < s.size(); i++) {
+        int size = s.size();//s.size() is subject to change in the for loop.
+        for (int i = 0; i < size; i++) {
             str[ctr] = (String) s.peek();
             MyDate date2 = new MyDate(str[ctr].substring(start));
             if (date.isLaterThan(date2) && ele!=null) {
@@ -330,7 +336,7 @@ public class Patient
     }
 
     public void updatePatient()
-    {//TODO: debug this. Exception is prob not null.
+    {
         PatientFile file=new PatientFile(this);
         Exception e = file.createFile(this);
         if(e!=null)

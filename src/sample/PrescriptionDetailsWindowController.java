@@ -36,6 +36,12 @@ public class PrescriptionDetailsWindowController implements Initializable {
     @FXML
     private TableView MedicineTable;
 
+    @FXML
+    private TableColumn medicines;
+
+    @FXML
+    private TableColumn instructions;
+
     public static void setPrescription(Prescription pre)
     {
         prescription = pre;
@@ -53,10 +59,15 @@ public class PrescriptionDetailsWindowController implements Initializable {
             NameTextField.setText(prescription.getPatientName());
             DateTextField.setText(prescription.getDate());
 
-            TableColumn medicines = new TableColumn("Medicines");
-            TableColumn instructions = new TableColumn("Instructions");
+//            TableColumn medicines = new TableColumn("Medicines");
+//            TableColumn instructions = new TableColumn("Instructions");
 
-            MedicineTable.getColumns().addAll(medicines,instructions);
+            double width = MedicineTable.getMaxWidth();
+
+//            instructions.setPrefWidth(width);
+//            instructions.setMaxWidth(width);
+
+//            MedicineTable.getColumns().addAll(medicines,instructions);
 
             medicines.setCellValueFactory(new PropertyValueFactory<Medicine,String>("medicine"));
             instructions.setCellValueFactory(new PropertyValueFactory<Medicine,String>("instruction"));

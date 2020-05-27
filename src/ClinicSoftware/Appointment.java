@@ -27,9 +27,7 @@ public class Appointment {
         this.userSignature=userSignature;
 
         try{
-            if(patient.getAppointmentCounter()==0)
-                patient.setFirstAppointmentFile(this.getFileName());
-            patient.setLatestAppointmentFile(this.getFileName());
+            patient.addAppointment(this.getFileName());
             reflect();
         }
         catch(NullPointerException e)

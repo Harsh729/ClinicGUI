@@ -324,7 +324,7 @@ public class MainWindowController implements Initializable {
     private MenuItem Menu_File_CreateSchedule;
 
     @FXML
-    private MenuItem Menu_File_CreateRecord;
+    private MenuItem Menu_File_CreatePatient;
 
     @FXML
     private Button ScheduleTabButton;
@@ -352,6 +352,15 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private Button DeletePatientButton;
+
+    @FXML
+    private Button AddLabWorkButton;
+
+    @FXML
+    private Button AddPrescriptionButton;
+
+    @FXML
+    private Button AddPatientButton;
 
     @FXML
     private AnchorPane ScheduleAnchorPane;

@@ -51,6 +51,7 @@ public class Main extends Application {
             mom.setTitle("Dr. Parul Doshi");
             mom.userSignature = 0;
             mom.start(stage);
+            MainWindowController.openLabWorkReminderWindow();
         }
         catch(Exception e)
         {

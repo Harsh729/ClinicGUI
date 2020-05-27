@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable {
 
-    private String dir=System.getProperty("user.dir")+"\\Directories\\";
+    private static String dir=System.getProperty("user.dir")+"\\Directories\\";
 
 
 
@@ -602,6 +602,32 @@ public class MainWindowController implements Initializable {
     @FXML
     void testResponse(){
         System.out.println("Test successful");
+    }
+
+    public static void openLabWorkReminderWindow()
+    {
+        LabWorkReminderController obj = new LabWorkReminderController();
+        MyDate today = new MyDate();
+        File folder = new File(dir+"Lab Work\\");
+        File[] files = folder.listFiles();
+        for(File file:files)
+        {
+            LabWorkFile lf = new LabWorkFile(file.getName().split("\\.")[0]);
+            LabWork lb = lf.readFile();
+            if(lb!=null)//avoiding NullPointerException
+            {
+                if(today.toString().equals(lb.getReceivedDate()))
+                    obj.addLabWorkToList(lb);
+            }
+        }
+        try {
+            LabWorkReminderMain obj2 = new LabWorkReminderMain();
+            obj2.start(new Stage());
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
 }

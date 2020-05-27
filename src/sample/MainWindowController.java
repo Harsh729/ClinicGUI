@@ -571,26 +571,6 @@ public class MainWindowController implements Initializable {
     }
 
     @FXML
-    public void openPatientDetailsWindow()
-    {
-        PatientDetailsWindowMain obj = new PatientDetailsWindowMain();
-        PatientTableWrapper wrap = (PatientTableWrapper)PatientTable.getSelectionModel().getSelectedItem();
-        PatientFile file = new PatientFile(wrap.getFileName());
-        try {
-            Patient patient = file.readFile();
-            obj.setPatient(patient);
-            Stage stage = new Stage();
-            obj.start(stage);
-        }
-        catch(Exception e)
-        {
-            System.out.print("Exception at openPatientWindow:");
-            e.printStackTrace();
-
-        }
-    }
-
-    @FXML
     public void closeWindow(){
         Stage stage=(Stage) ScheduleTabButton.getScene().getWindow();
         stage.close();
@@ -619,6 +599,25 @@ public class MainWindowController implements Initializable {
         initializePatientTable();
     }
 
+    @FXML
+    public void openPatientDetailsWindow()
+    {
+        PatientDetailsWindowMain obj = new PatientDetailsWindowMain();
+        PatientTableWrapper wrap = (PatientTableWrapper)PatientTable.getSelectionModel().getSelectedItem();
+        PatientFile file = new PatientFile(wrap.getFileName());
+        try {
+            Patient patient = file.readFile();
+            obj.setPatient(patient);
+            Stage stage = new Stage();
+            obj.start(stage);
+        }
+        catch(Exception e)
+        {
+            System.out.print("Exception at openPatientWindow:");
+            e.printStackTrace();
+
+        }
+    }
     @FXML
     void createLabWork(){
         CreateLabWorkMain obj=new CreateLabWorkMain();
@@ -652,6 +651,24 @@ public class MainWindowController implements Initializable {
             System.out.println("File deleted successfully");
         }
         initializePrescriptionTable();
+    }
+
+    @FXML
+    public void openPrescriptionDetailsWindow()
+    {
+        try {
+            Prescription prescription = (Prescription) PrescriptionsTable.getSelectionModel().getSelectedItem();
+            PrescriptionFile file = new PrescriptionFile(prescription.getFileName());
+            prescription = file.readFile();
+            PrescriptionDetailsWindowController.setPrescription(prescription);
+            PrescriptionDetailsWindowMain obj = new PrescriptionDetailsWindowMain();
+            obj.start(new Stage());
+
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @FXML

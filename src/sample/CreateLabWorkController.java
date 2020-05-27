@@ -13,6 +13,8 @@ public class CreateLabWorkController {
 
     public static AddScheduleWindowController obj=new AddScheduleWindowController();
 
+    public static MainWindowController mainWindowController = new MainWindowController();
+
     @FXML
     private Button CancelButton;
 
@@ -47,7 +49,13 @@ public class CreateLabWorkController {
         LabWork newLabWork=new LabWork(sentDate.toString(),receivedDate.toString(),LabNameTextField.getText(),LabWorkTextField.getText(),PatientNameTextField.getText());
         LabWorkFile file=new LabWorkFile(newLabWork);
         obj.setLab(newLabWork);
+        mainWindowController.initializeLabWorkTable();
         closeWindow();
+    }
+
+    public void setMainWindowController(MainWindowController obj)
+    {
+        mainWindowController = obj;
     }
 
 }

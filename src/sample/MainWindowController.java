@@ -321,6 +321,9 @@ public class MainWindowController implements Initializable {
     private TableView LabWorkTable;
 
     @FXML
+    private Button DeleteLabWorkButton;
+
+    @FXML
     private AnchorPane ScheduleAnchorPane;
 
     @FXML
@@ -543,6 +546,15 @@ public class MainWindowController implements Initializable {
         obj.setMainWindowController(this);
         Stage stage=new Stage();
         obj.start(stage);
+    }
+
+    @FXML
+    void deleteLabWork(){
+        LabWork selected = (LabWork)LabWorkTable.getSelectionModel().getSelectedItem();
+        LabWorkFile file = new LabWorkFile(selected);//file to be deleted
+        if(file.deleteFile())
+            System.out.println("File Deleted Successfully");
+        initializeLabWorkTable();
     }
 
     @FXML

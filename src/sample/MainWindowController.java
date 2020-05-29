@@ -595,7 +595,9 @@ public class MainWindowController implements Initializable {
         try {
             CreatePatientMain obj = new CreatePatientMain();
             Stage stage = new Stage();
+            obj.setMainWindowController(this);
             obj.start(stage);
+            //initializePatientTable(); can't do this as the CreatePatientWindow gets terminated after this line is executed.
         }
         catch(Exception e)
         {
@@ -608,9 +610,16 @@ public class MainWindowController implements Initializable {
     {
         PatientTableWrapper wrap = (PatientTableWrapper)PatientTable.getSelectionModel().getSelectedItem();
         PatientFile file = new PatientFile(wrap.getFileName());
-        if(file.deleteFile())
-            System.out.println("File deleted successfully");
-        initializePatientTable();
+        DeleteConfirmationMain obj = new DeleteConfirmationMain();
+        obj.setFile(file);
+        obj.setObj(this);
+        try {
+            obj.start(new Stage());
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @FXML

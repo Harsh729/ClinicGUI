@@ -210,7 +210,7 @@ public class Appointment {
     {
         try {
             AppointmentFile af = new AppointmentFile(this);
-            af.delete();
+            af.deleteFile();
             this.patient.updateLatestAppointment(this);
         }
         catch (Exception e)

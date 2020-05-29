@@ -1,11 +1,11 @@
 package ClinicSoftware;
 import java.io.*;
-import java.util.*;
+
 import com.opencsv.*;
 public class LabWorkFile extends ClinicFile
 {
     private String labHeader[]={"Patient Name","Sent Date","Received Date","Lab Name","Description"};
-    private String labFolder="Lab Work/";
+    private String folderName ="Lab Work/";
     private String fileName;
     private String dir=super.getDirectory(super.userSignature);
 
@@ -21,7 +21,7 @@ public class LabWorkFile extends ClinicFile
         super(-1);
         dir = super.getDirectory(userSignature);
         fileName=labWork.getFileName();
-        if(!isFilePresent(dir,labFolder,fileName))
+        if(!isFilePresent(dir, folderName,fileName))
             System.out.println(createFileWithMessage(labWork));
         else
             System.out.println("LF: exists");
@@ -29,7 +29,7 @@ public class LabWorkFile extends ClinicFile
 
     public String getDirectory()
     {
-        return dir+labFolder+fileName;
+        return dir+ folderName +fileName;
     }
 
     public String getFileName()
@@ -50,7 +50,7 @@ public class LabWorkFile extends ClinicFile
     {
         if(createCount==0) {
             try {
-                FileWriter fw = new FileWriter(dir + labFolder + lab.getPatientName() + " " + lab.getSentDate() + ".csv");
+                FileWriter fw = new FileWriter(dir + folderName + lab.getPatientName() + " " + lab.getSentDate() + ".csv");
                 CSVWriter writer = new CSVWriter(fw);
                 writer.writeNext(labHeader);
                 String labDetails[] = {lab.getPatientName(), lab.getSentDate(), lab.getReceivedDate(), lab.getLabName(), lab.getWork()};
@@ -70,7 +70,7 @@ public class LabWorkFile extends ClinicFile
     public LabWork readFile()
     {
         try {
-            FileReader fr = new FileReader(dir + labFolder + fileName + ".csv");
+            FileReader fr = new FileReader(dir + folderName + fileName + ".csv");
             CSVReader reader = new CSVReader(fr);
             String LabWork[];
             reader.readNext();
@@ -101,7 +101,7 @@ public class LabWorkFile extends ClinicFile
 
     public boolean deleteFile()
     {
-        File file =new File(dir+labFolder+fileName+".csv");
+        File file =new File(dir+ folderName +fileName+".csv");
         createCount = 0;
         System.gc();
         return file.delete();
@@ -110,17 +110,17 @@ public class LabWorkFile extends ClinicFile
     public Exception editFile(int index, String entry)
     {
         try {
-            FileReader fr = new FileReader(dir + labFolder + fileName + ".csv");
+            FileReader fr = new FileReader(dir + folderName + fileName + ".csv");
             CSVReader reader=new CSVReader(fr);
-            FileWriter fw=new FileWriter(dir+labFolder+"temp.csv");
+            FileWriter fw=new FileWriter(dir+ folderName +"temp.csv");
             CSVWriter writer=new CSVWriter(fw);
             writer.writeNext(reader.readNext());
             String temp[]=reader.readNext();
             temp[index]=entry;
             writer.writeNext(temp);
-            File file=new File(dir+labFolder+fileName+".csv");
+            File file=new File(dir+ folderName +fileName+".csv");
             file.delete();
-            File newFile=new File(dir+labFolder+"temp.csv");
+            File newFile=new File(dir+ folderName +"temp.csv");
             newFile.renameTo(file);
             reader.close();
             fr.close();
@@ -137,7 +137,7 @@ public class LabWorkFile extends ClinicFile
 
     public int getIndex(String title)throws IOException
     {
-        FileReader fr=new FileReader(dir+labFolder+fileName+".csv");
+        FileReader fr=new FileReader(dir+ folderName +fileName+".csv");
         CSVReader reader=new CSVReader(fr);
         String temp[]=reader.readNext();
         for(int i=0;i<temp.length;i++)
@@ -146,5 +146,10 @@ public class LabWorkFile extends ClinicFile
                 return i;
         }
         return -999;
+    }
+
+    public String getFolderName()
+    {
+        return this.folderName;
     }
 }

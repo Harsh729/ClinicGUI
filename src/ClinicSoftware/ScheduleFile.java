@@ -94,6 +94,16 @@ public class ScheduleFile extends ClinicFile {
         }
     }
 
+    @Override
+    public String getFileName() {
+        return fileName;
+    }
+
+    @Override
+    public String getFolderName() {
+        return folderName;
+    }
+
     public boolean deleteFile() {
         File file = new File(dir + folderName + fileName + ".csv");
         createCount = 0;

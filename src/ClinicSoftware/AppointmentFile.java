@@ -81,9 +81,20 @@ public class AppointmentFile extends ClinicFile{
         }
     }
 
-    public boolean delete() {
+    @Override
+    public String getFolderName() {
+        return folderName;
+    }
+
+    @Override
+    public String getFileName() {
+        return fileName;
+    }
+
+    public boolean deleteFile() {
         File file = new File(dir + folderName + fileName + ".csv");
         createCount = 0;
+        System.gc();
         return file.delete();
     }
 
@@ -130,4 +141,6 @@ public class AppointmentFile extends ClinicFile{
     {
         return editFile(index,age+"");
     }
+
+
 }

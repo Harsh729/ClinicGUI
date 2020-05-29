@@ -4,7 +4,13 @@ import com.opencsv.*;
 public class PrescriptionFile extends ClinicFile
 {
     private String prescriptionHeader[]={"Medicine Name","Instruction"};
-    private String prescriptionFolder="Prescriptions/";
+
+    @Override
+    public String getFolderName() {
+        return folderName;
+    }
+
+    private String folderName ="Prescriptions/";
     private String fileName;
     private String dir=super.getDirectory(-1);
 
@@ -19,7 +25,7 @@ public class PrescriptionFile extends ClinicFile
     {
         super(-1);
         fileName=prescription.getFileName();
-        if(!isFilePresent(dir,prescriptionFolder,fileName))
+        if(!isFilePresent(dir, folderName,fileName))
         {
             System.out.println(createFileWithMessage(prescription));
         }
@@ -27,7 +33,7 @@ public class PrescriptionFile extends ClinicFile
 
     public String getDirectory()
     {
-        return dir+prescriptionFolder+fileName;
+        return dir+ folderName +fileName;
     }
 
     public String getFileName()
@@ -48,7 +54,7 @@ public class PrescriptionFile extends ClinicFile
     {
         if(createCount==0) {
             try {
-                FileWriter fw = new FileWriter(dir + prescriptionFolder + prescription.getPatientName() + " " + prescription.getDate() + ".csv");
+                FileWriter fw = new FileWriter(dir + folderName + prescription.getPatientName() + " " + prescription.getDate() + ".csv");
                 CSVWriter writer = new CSVWriter(fw);
                 String preHeader[] = {prescription.getPatientName(), prescription.getDate()};
                 writer.writeNext(preHeader);
@@ -73,7 +79,7 @@ public class PrescriptionFile extends ClinicFile
     public Prescription readFile()throws IOException
     {
         try {
-            FileReader fr = new FileReader(dir + prescriptionFolder + fileName + ".csv");
+            FileReader fr = new FileReader(dir + folderName + fileName + ".csv");
             CSVReader reader = new CSVReader(fr);
             String details[]=reader.readNext();
             reader.readNext();
@@ -102,7 +108,7 @@ public class PrescriptionFile extends ClinicFile
     }
 
     public boolean deleteFile() {
-        File file = new File(dir + prescriptionFolder + fileName + ".csv");
+        File file = new File(dir + folderName + fileName + ".csv");
         createCount = 0;
         System.gc();
         return file.delete();
@@ -111,9 +117,9 @@ public class PrescriptionFile extends ClinicFile
     public Exception deleteEntry(int index)throws IOException
     {
         try {
-            FileReader fr = new FileReader(dir + prescriptionFolder + fileName + ".csv");
+            FileReader fr = new FileReader(dir + folderName + fileName + ".csv");
             CSVReader reader = new CSVReader(fr);
-            FileWriter fw = new FileWriter(dir + prescriptionFolder + "temp.csv");
+            FileWriter fw = new FileWriter(dir + folderName + "temp.csv");
             CSVWriter writer = new CSVWriter(fw);
             int ctr = -1;
             String temp2[];
@@ -128,8 +134,8 @@ public class PrescriptionFile extends ClinicFile
             fr.close();
             writer.close();
             fw.close();
-            File file = new File(dir + prescriptionFolder + fileName + ".csv");
-            File newFile = new File(dir + prescriptionFolder + "temp.csv");
+            File file = new File(dir + folderName + fileName + ".csv");
+            File newFile = new File(dir + folderName + "temp.csv");
             deleteFile();
             newFile.renameTo(file);
         }
@@ -146,9 +152,9 @@ public class PrescriptionFile extends ClinicFile
         boolean flag =true;
         try
         {
-            FileWriter fw = new FileWriter(dir+prescriptionFolder+"temp.csv");
+            FileWriter fw = new FileWriter(dir+ folderName +"temp.csv");
             CSVWriter writer = new CSVWriter(fw);
-            FileReader fr=new FileReader(dir+prescriptionFolder+fileName+".csv");
+            FileReader fr=new FileReader(dir+ folderName +fileName+".csv");
             CSVReader reader=new CSVReader(fr);
             String temp[];
             int ctr=0;
@@ -178,10 +184,10 @@ public class PrescriptionFile extends ClinicFile
             fw.close();
             reader.close();
             fr.close();
-            File file=new File(dir+prescriptionFolder+fileName+".csv");
+            File file=new File(dir+ folderName +fileName+".csv");
             if(!file.delete())
                 flag=false;
-            File temp2=new File(dir+prescriptionFolder+"temp.csv");
+            File temp2=new File(dir+ folderName +"temp.csv");
             temp2.renameTo(file);
         }
         catch(Exception e)
@@ -207,7 +213,7 @@ public class PrescriptionFile extends ClinicFile
     public int getIndex(String fileName,String medicine)throws IOException
     {
         int ctr=1;
-        FileReader fr=new FileReader(dir+prescriptionFolder+fileName+".csv");
+        FileReader fr=new FileReader(dir+ folderName +fileName+".csv");
         CSVReader reader=new CSVReader(fr);
         String temp[];
         reader.readNext();
@@ -228,7 +234,7 @@ public class PrescriptionFile extends ClinicFile
 
     public int getLastIndex(String fileName)throws IOException
     {
-        FileReader fr=new FileReader(dir+prescriptionFolder+fileName+".csv");
+        FileReader fr=new FileReader(dir+ folderName +fileName+".csv");
         CSVReader reader=new CSVReader(fr);
         int ctr=0;
         reader.readNext();

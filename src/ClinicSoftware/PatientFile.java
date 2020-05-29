@@ -171,5 +171,13 @@ public class PatientFile extends ClinicFile {
         return editFile(index,age+"");
     }
 
+    @Override
+    public String getFolderName() {
+        return folderName;
+    }
 
+    @Override
+    public String getFileName() {
+        return fileName;
+    }
 }

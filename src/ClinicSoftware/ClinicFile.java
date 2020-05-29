@@ -42,4 +42,25 @@ public class ClinicFile {
         }
         return true;
     }
+
+    ClinicFile file;
+
+    public String getFileName()
+    {
+        return "file";
+    }
+
+    public String getFolderName()
+    {
+        return "folder";
+    }
+
+    public boolean deleteFile()
+    {
+        if(file!=null)
+        {
+            return file.deleteFile();
+        }
+        return false;
+    }
 }

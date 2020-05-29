@@ -23,6 +23,8 @@ public class CreatePatientMain extends Application {
         CreatePatientController.obj=obj;
     }
 
+    public void setMainWindowController(MainWindowController obj) { CreatePatientController.setMainWindowController(obj); }
+
     public static void main(String args[])
     {
         launch(args);

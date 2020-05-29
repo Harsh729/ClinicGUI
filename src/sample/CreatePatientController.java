@@ -42,6 +42,8 @@ public class CreatePatientController {
     @FXML
     private Button OKButton;
 
+    public static MainWindowController mainWindowController = new MainWindowController();
+
     @FXML
     void closeWindow() {
         Stage stage=(Stage)CancelButton.getScene().getWindow();
@@ -55,6 +57,7 @@ public class CreatePatientController {
             Patient newPatient =new Patient(NameTextField.getText(),PhoneTextField.getText(),"",Integer.valueOf(AgeTextField.getText()),DescriptionTextArea.getText(),"",HeartConditionCheckBox.isSelected(),AllergiesCheckBox.isSelected(),BloodPressureCheckBox.isSelected(),DiabetesCheckBox.isSelected());
             PatientFile newFile=new PatientFile(newPatient);
             obj.setPatient(newPatient);
+            mainWindowController.initializePatientTable();
             closeWindow();
         }
         catch(Exception e)
@@ -63,4 +66,7 @@ public class CreatePatientController {
         }
     }
 
+    public static void setMainWindowController(MainWindowController mainWindowController) {
+        CreatePatientController.mainWindowController = mainWindowController;
+    }
 }

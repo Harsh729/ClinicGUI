@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="150.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DeleteConfirmationController">
+   <children>
+      <Label layoutX="27.0" layoutY="19.0" text="Are you sure you want to delete the following?">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="ToBeDeleted" layoutX="27.0" layoutY="65.0" text="Label">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ButtonBar layoutY="170.0" prefHeight="40.0" prefWidth="410.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <buttons>
+            <Button fx:id="CancelButton" cancelButton="true" mnemonicParsing="false" onAction="#closeWindow" text="Cancel" />
+            <Button fx:id="OKButton" defaultButton="true" mnemonicParsing="false" onAction="#execute" text="OK" />
+         </buttons>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </ButtonBar>
+   </children>
+</AnchorPane>

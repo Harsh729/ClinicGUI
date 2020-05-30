@@ -302,13 +302,13 @@ public class AddScheduleWindowController implements Initializable {
     {
         String search = searchTextField.getText();
         searchContextMenu.getItems().clear();
-        ObservableList<String> data = obj.search(search);
+        ObservableList<String> data = obj.search(search, new PatientFile(""));
         ObservableList<MenuItem> items = FXCollections.observableArrayList();
 
         for(String s:data)
         {
             MenuItem item = new MenuItem();
-            item.setGraphic(highlight(s,search));
+            item.setGraphic(obj.highlight(s,search));
             EventHandler event = new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -336,19 +336,4 @@ public class AddScheduleWindowController implements Initializable {
         phoneTextField.setText(phone);
     }
 
-    TextFlow highlight(String text, String search)
-    {
-        int start = text.indexOf(search);
-        TextFlow result = new TextFlow();
-        if(start!=-1)
-        {
-            Text beginning = new Text(text.substring(0,start));
-            Text end = new Text(text.substring(start + search.length()));
-            Text highlight = new Text(search);
-            highlight.setFill(Color.ORANGE);
-            highlight.setFont(Font.font("Helvetica",FontWeight.BOLD,12));
-            result = new TextFlow(beginning,highlight,end);
-        }
-        return result;
-    }
 }

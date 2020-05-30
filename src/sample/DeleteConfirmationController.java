@@ -37,7 +37,8 @@ public class DeleteConfirmationController implements Initializable {
     void execute(ActionEvent event) {
         if(File.deleteFile())
             System.out.println("File deleted successfully.");
-        obj.initializePatientTable();
+
+        this.initializeTable();
         closeWindow(event);
     }
 
@@ -55,5 +56,22 @@ public class DeleteConfirmationController implements Initializable {
 
     public static void setObj(MainWindowController obj) {
         DeleteConfirmationController.obj = obj;
+    }
+
+    public void initializeTable()//to initialize the table pertaining to the file under consideration
+    {
+        String folderName = File.getFolderName();
+        switch(folderName)
+        {
+            case "Lab Work/":
+                obj.initializeLabWorkTable();
+                break;
+            case "Prescriptions/":
+                obj.initializePrescriptionTable();
+                break;
+            case "Records/":
+                obj.initializePatientTable();
+                break;
+        }
     }
 }

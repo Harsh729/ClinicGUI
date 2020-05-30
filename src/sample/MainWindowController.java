@@ -43,21 +43,21 @@ public class MainWindowController implements Initializable {
 //            }
 //        }
 
-        initializeLabWorkTable();
-        initializePrescriptionTable();
+        //initializeLabWorkTable();
+       // initializePrescriptionTable();
         MyDate date=new MyDate();
         String d=date.toString();
         //System.out.println(d);
         initializeScheduleTable(d);
-        initializePatientTable();
+        //initializePatientTable();
     }
 
     public void init(String date)
     {
-        initializeLabWorkTable();
-        initializePrescriptionTable();
+        //initializeLabWorkTable();
+        //initializePrescriptionTable();
         initializeScheduleTable(date);
-        initializePatientTable();
+        //initializePatientTable();
     }
 
     public void initializeLabWorkTable()
@@ -653,15 +653,23 @@ public class MainWindowController implements Initializable {
     void deleteLabWork(){
         LabWork selected = (LabWork)LabWorkTable.getSelectionModel().getSelectedItem();
         LabWorkFile file = new LabWorkFile(selected.getFileName());//file to be deleted
-        if(file.deleteFile())
-            System.out.println("File Deleted Successfully");
-        initializeLabWorkTable();
+        DeleteConfirmationMain obj = new DeleteConfirmationMain();
+        obj.setFile(file);
+        obj.setObj(this);
+        try {
+            obj.start(new Stage());
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void createPrescription(){
         CreatePrescriptionMain obj=new CreatePrescriptionMain();
         Stage stage=new Stage();
+        obj.setMainWindowControllerObject(this);
         obj.start(stage);
     }
 
@@ -669,11 +677,16 @@ public class MainWindowController implements Initializable {
     void deletePrescription(){
         Prescription selected = (Prescription)PrescriptionsTable.getSelectionModel().getSelectedItem();
         PrescriptionFile file = new PrescriptionFile(selected.getFileName());
-        if(file.deleteFile())
-        {
-            System.out.println("File deleted successfully");
+        DeleteConfirmationMain obj = new DeleteConfirmationMain();
+        obj.setFile(file);
+        obj.setObj(this);
+        try {
+            obj.start(new Stage());
         }
-        initializePrescriptionTable();
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @FXML

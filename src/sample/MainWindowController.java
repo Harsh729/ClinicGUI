@@ -773,4 +773,33 @@ public class MainWindowController implements Initializable {
         }
     }
 
+    public ObservableList search(String search)
+    {
+        ObservableList<String> data = FXCollections.observableArrayList();
+        PatientFile pf = new PatientFile("");
+        File folder = new File(dir+pf.getFolderName());
+        File files[] = folder.listFiles();
+        for(File file:files)
+        {
+            String fileName = file.getName().split("\\.")[0];
+            if(fileName.contains(search))
+            {
+                data.add(fileName);
+            }
+        }
+        return data;
+    }
+
+    public void useSearchInPatientTable(String fileName)
+    {
+        PatientFile pf = new PatientFile(fileName);
+        try {
+            Patient searched = pf.readFile();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
 }

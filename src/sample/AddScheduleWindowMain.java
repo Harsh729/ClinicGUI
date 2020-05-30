@@ -16,7 +16,7 @@ public class AddScheduleWindowMain extends Application {
     public void start(Stage primaryStage) throws Exception{
         AnchorPane root = FXMLLoader.load(getClass().getResource("AddScheduleWindow.fxml"));
         primaryStage.setTitle("Add Schedule");
-        primaryStage.setScene(new Scene(root, 400, 343));
+        primaryStage.setScene(new Scene(root, 400, 439));
         primaryStage.show();
         AddScheduleWindowController.obj=obj;
     }

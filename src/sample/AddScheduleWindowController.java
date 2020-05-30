@@ -1,11 +1,14 @@
 package sample;
 
 import ClinicSoftware.*;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -117,6 +120,15 @@ public class AddScheduleWindowController implements Initializable {
 
     @FXML
     private Button CreatePrescriptionButton;
+
+    @FXML
+    private TextField searchTextField;
+
+    @FXML
+    private ContextMenu searchContextMenu;
+
+    @FXML
+    private Button doneButton;
 
     private ObservableList<String> data=FXCollections.observableArrayList();
 
@@ -278,5 +290,43 @@ public class AddScheduleWindowController implements Initializable {
     public void setPrescription(Prescription pre)
     {
         this.pre=pre;
+    }
+
+    @FXML
+    public void search()
+    {
+        String search = searchTextField.getText();
+        searchContextMenu.getItems().clear();
+        ObservableList<String> data = obj.search(search);
+        ObservableList<MenuItem> items = FXCollections.observableArrayList();
+
+        for(String s:data)
+        {
+            MenuItem item = new MenuItem(s);
+            EventHandler event = new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    searchTextField.setText(s);
+                }
+            };
+            item.setOnAction(event);
+            items.add(item);
+        }
+
+        searchContextMenu.getItems().addAll(items);
+        searchTextField.setContextMenu(searchContextMenu);
+        Bounds dims = searchTextField.localToScreen(searchTextField.getBoundsInLocal());
+        searchContextMenu.show(searchTextField,dims.getMinX(),dims.getMaxY());
+    }
+
+    @FXML
+    public void useSearch()
+    {
+        String fileName = searchTextField.getText();
+        int separate = fileName.lastIndexOf(" ");
+        String name = fileName.substring(0,separate);
+        String phone = fileName.substring(separate+1);
+        nameTextField.setText(name);
+        phoneTextField.setText(phone);
     }
 }

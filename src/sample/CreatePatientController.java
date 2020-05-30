@@ -54,6 +54,8 @@ public class CreatePatientController {
     void save() {
         try
         {
+            if(AgeTextField.getText().equals(""))
+                AgeTextField.setText("-1");
             Patient newPatient =new Patient(NameTextField.getText(),PhoneTextField.getText(),"",Integer.valueOf(AgeTextField.getText()),DescriptionTextArea.getText(),"",HeartConditionCheckBox.isSelected(),AllergiesCheckBox.isSelected(),BloodPressureCheckBox.isSelected(),DiabetesCheckBox.isSelected());
             PatientFile newFile=new PatientFile(newPatient);
             obj.setPatient(newPatient);

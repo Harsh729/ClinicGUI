@@ -12,6 +12,11 @@ import javafx.geometry.Bounds;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -302,7 +307,8 @@ public class AddScheduleWindowController implements Initializable {
 
         for(String s:data)
         {
-            MenuItem item = new MenuItem(s);
+            MenuItem item = new MenuItem();
+            item.setGraphic(highlight(s,search));
             EventHandler event = new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -328,5 +334,21 @@ public class AddScheduleWindowController implements Initializable {
         String phone = fileName.substring(separate+1);
         nameTextField.setText(name);
         phoneTextField.setText(phone);
+    }
+
+    TextFlow highlight(String text, String search)
+    {
+        int start = text.indexOf(search);
+        TextFlow result = new TextFlow();
+        if(start!=-1)
+        {
+            Text beginning = new Text(text.substring(0,start));
+            Text end = new Text(text.substring(start + search.length()));
+            Text highlight = new Text(search);
+            highlight.setFill(Color.ORANGE);
+            highlight.setFont(Font.font("Helvetica",FontWeight.BOLD,12));
+            result = new TextFlow(beginning,highlight,end);
+        }
+        return result;
     }
 }

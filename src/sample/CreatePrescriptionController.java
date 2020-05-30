@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 public class CreatePrescriptionController {
 
     public static AddScheduleWindowController obj=new AddScheduleWindowController();
+    public  static MainWindowController MainWindowControllerObject;
 
     public static String name="";
 
@@ -52,7 +53,13 @@ public class CreatePrescriptionController {
         }
         PrescriptionFile file=new PrescriptionFile(newPrescription);
         obj.setPrescription(newPrescription);
+        MainWindowControllerObject.initializePrescriptionTable();
         closeWindow();
+    }
+
+    public static void setMainWindowObject(MainWindowController object)
+    {
+        MainWindowControllerObject=object;
     }
 
 }

@@ -32,6 +32,11 @@ public class CreatePrescriptionMain extends Application {
         }
     }
 
+    public  void setMainWindowControllerObject(MainWindowController object)
+    {
+        CreatePrescriptionController.setMainWindowObject(object);
+    }
+
     public  static void main(String args[])
     {
         launch(args);

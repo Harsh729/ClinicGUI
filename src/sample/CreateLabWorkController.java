@@ -56,8 +56,9 @@ public class CreateLabWorkController {
         MyDate receivedDate;
         if(ReceivedDatePicker.getValue()==null)
             receivedDate = MyDate.nullDate();
+        else
+            receivedDate=new MyDate(ReceivedDatePicker.getValue().toString());
         MyDate sentDate=new MyDate(SentDatePicker.getValue().toString());
-        receivedDate=new MyDate(ReceivedDatePicker.getValue().toString());
         LabWork newLabWork=new LabWork(sentDate.toString(),receivedDate.toString(),LabNameTextField.getText(),LabWorkTextField.getText(),PatientNameTextField.getText());
         LabWorkFile file=new LabWorkFile(newLabWork);
         obj.setLab(newLabWork);

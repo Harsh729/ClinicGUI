@@ -7,7 +7,10 @@ public class LabWork
     public LabWork(String sentDate,String receivedDate,String labName,String work, String patientName)
     {
         this.sentDate=sentDate;
-        this.receivedDate=receivedDate;
+        if(receivedDate.equals("01-01-1970"))
+            this.receivedDate = "Date not entered";
+        else
+            this.receivedDate=receivedDate;
         this.labName=labName;
         this.work=work;
         this.patientName=patientName;

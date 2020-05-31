@@ -53,8 +53,11 @@ public class CreateLabWorkController {
 
     @FXML
     void save() {
+        MyDate receivedDate;
+        if(ReceivedDatePicker.getValue()==null)
+            receivedDate = MyDate.nullDate();
         MyDate sentDate=new MyDate(SentDatePicker.getValue().toString());
-        MyDate receivedDate=new MyDate(ReceivedDatePicker.getValue().toString());
+        receivedDate=new MyDate(ReceivedDatePicker.getValue().toString());
         LabWork newLabWork=new LabWork(sentDate.toString(),receivedDate.toString(),LabNameTextField.getText(),LabWorkTextField.getText(),PatientNameTextField.getText());
         LabWorkFile file=new LabWorkFile(newLabWork);
         obj.setLab(newLabWork);

@@ -3,11 +3,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -60,48 +62,6 @@
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                     <children>
-                  <AnchorPane fx:id="PatientAnchorPane" prefHeight="560.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <SplitPane dividerPositions="0.8781362007168458" orientation="VERTICAL" prefHeight="560.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <items>
-                            <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <TableView fx:id="PatientTable" onMouseClicked="#checkIfSelectedPatient" prefHeight="516.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                 </children>
-                              </AnchorPane>
-                            <AnchorPane maxHeight="63.0" prefHeight="105.0" prefWidth="670.0" SplitPane.resizableWithParent="false">
-                                 <children>
-                                    <HBox alignment="CENTER_RIGHT" prefHeight="63.0" prefWidth="672.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <Button fx:id="DeletePatientButton" layoutX="570.0" mnemonicParsing="false" onAction="#deletePatient" prefHeight="42.0" prefWidth="100.0" text="Delete">
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                             <font>
-                                                <Font name="System Bold" size="21.0" />
-                                             </font>
-                                          </Button>
-                                          <Button fx:id="DisplayPatientDetailsButton" mnemonicParsing="false" onAction="#openPatientDetailsWindow" prefHeight="42.0" prefWidth="100.0" text="Details">
-                                             <font>
-                                                <Font name="System Bold" size="21.0" />
-                                             </font>
-                                          </Button>
-                                          <Button fx:id="AddPatientButton" mnemonicParsing="false" onAction="#createPatient" text="Add">
-                                             <font>
-                                                <Font name="System Bold" size="21.0" />
-                                             </font>
-                                          </Button>
-                                       </children>
-                                       <padding>
-                                          <Insets right="10.0" top="5.0" />
-                                       </padding>
-                                    </HBox>
-                                 </children>
-                              </AnchorPane>
-                          </items>
-                        </SplitPane>
-                     </children>
-                  </AnchorPane>
                         <AnchorPane fx:id="LabWorkAnchorPane" layoutY="-2.0" prefHeight="562.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
                             <children>
                         <SplitPane dividerPositions="0.8781" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -185,6 +145,54 @@
                                 </SplitPane>
                             </children>
                         </AnchorPane>
+                  <AnchorPane fx:id="PatientAnchorPane" prefHeight="560.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <SplitPane dividerPositions="0.03, 0.78" orientation="VERTICAL" prefHeight="560.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <items>
+                              <AnchorPane prefHeight="96.0" prefWidth="672.0">
+                                 <children>
+                                    <TextField fx:id="searchTextField" layoutX="153.0" layoutY="11.0" onKeyTyped="#useSearchInPatientTable" promptText="Search for Patient" />
+                                    <Label layoutX="107.0" layoutY="15.0" text="Search:" />
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane prefHeight="164.0" prefWidth="672.0">
+                                 <children>
+                                    <TableView fx:id="PatientTable" onMouseClicked="#checkIfSelectedPatient" prefHeight="516.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane maxHeight="63.0" prefHeight="105.0" prefWidth="670.0" SplitPane.resizableWithParent="false">
+                                 <children>
+                                    <HBox alignment="CENTER_RIGHT" prefHeight="63.0" prefWidth="672.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Button fx:id="DeletePatientButton" layoutX="570.0" mnemonicParsing="false" onAction="#deletePatient" prefHeight="42.0" prefWidth="100.0" text="Delete">
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="21.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="DisplayPatientDetailsButton" mnemonicParsing="false" onAction="#openPatientDetailsWindow" prefHeight="42.0" prefWidth="100.0" text="Details">
+                                             <font>
+                                                <Font name="System Bold" size="21.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="AddPatientButton" mnemonicParsing="false" onAction="#createPatient" text="Add">
+                                             <font>
+                                                <Font name="System Bold" size="21.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                       <padding>
+                                          <Insets right="10.0" top="5.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
                         <AnchorPane fx:id="ScheduleAnchorPane" layoutX="2.0" prefHeight="560.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
                                 <SplitPane dividerPositions="0.8942652329749103" orientation="VERTICAL" prefHeight="560.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

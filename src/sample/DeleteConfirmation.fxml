@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="150.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DeleteConfirmationController">
    <children>
       <Label layoutX="27.0" layoutY="19.0" text="Are you sure you want to delete the following?">
@@ -15,7 +14,7 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <Label fx:id="ToBeDeleted" layoutX="27.0" layoutY="65.0" text="Label">
+      <Label fx:id="ToBeDeleted" layoutX="27.0" layoutY="55.0" text="Label">
          <font>
             <Font size="14.0" />
          </font>
@@ -29,5 +28,6 @@
             <Insets right="10.0" />
          </padding>
       </ButtonBar>
+      <Label fx:id="WarningLabel" layoutX="30.0" layoutY="93.0" textFill="#bf0202" wrapText="true" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
    </children>
 </AnchorPane>

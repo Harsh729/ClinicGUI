@@ -17,6 +17,9 @@ public class DeleteConfirmationController implements Initializable {
     private Label ToBeDeleted;
 
     @FXML
+    private Label WarningLabel;
+
+    @FXML
     private Button CancelButton;
 
     @FXML
@@ -48,6 +51,7 @@ public class DeleteConfirmationController implements Initializable {
         String folder = File.getFolderName();
         folder = folder.substring(0,folder.length()-1);
         ToBeDeleted.setText(folder+": "+File.getFileName());
+        setWarningLabel();
     }
 
     public static void setFile(ClinicFile file) {
@@ -73,5 +77,11 @@ public class DeleteConfirmationController implements Initializable {
                 obj.initializePatientTable();
                 break;
         }
+    }
+
+    public void setWarningLabel()
+    {
+        if(File.getFolderName().equals("Records/"))
+            WarningLabel.setText("Warning: Corresponding appointments will become vacant in the Schedule!");
     }
 }

@@ -1,10 +1,13 @@
 package sample;
 
 import ClinicSoftware.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.geometry.Bounds;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class CreateLabWorkController {
@@ -37,6 +40,12 @@ public class CreateLabWorkController {
     private DatePicker ReceivedDatePicker;
 
     @FXML
+    private TextField searchTextField;
+
+    @FXML
+    private ContextMenu searchContextMenu;
+
+    @FXML
     void closeWindow() {
         Stage stage=(Stage)CancelButton.getScene().getWindow();
         stage.close();
@@ -53,9 +62,47 @@ public class CreateLabWorkController {
         closeWindow();
     }
 
-    public void setMainWindowController(MainWindowController obj)
+    public static void setMainWindowController(MainWindowController obj)
     {
         mainWindowController = obj;
+    }
+
+    @FXML
+    public void search()
+    {
+        String search = searchTextField.getText();
+        searchContextMenu.getItems().clear();
+        ObservableList<String> data = mainWindowController.search(search, new PatientFile(""));
+        ObservableList<MenuItem> items = FXCollections.observableArrayList();
+
+        for(String s:data)
+        {
+            MenuItem item = new MenuItem();
+            item.setGraphic(mainWindowController.highlight(s,search));
+            EventHandler event = new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    searchTextField.setText(s);
+                }
+            };
+            item.setOnAction(event);
+            items.add(item);
+        }
+
+        searchContextMenu.getItems().addAll(items);
+        searchTextField.setContextMenu(searchContextMenu);
+        Bounds dims = searchTextField.localToScreen(searchTextField.getBoundsInLocal());
+        searchContextMenu.show(searchTextField,dims.getMinX(),dims.getMaxY());
+    }
+
+    @FXML
+    public void useSearch()
+    {
+        String fileName = searchTextField.getText();
+        int separate = fileName.lastIndexOf(" ");
+        String name = fileName.substring(0,separate);
+        String phone = fileName.substring(separate+1);
+        PatientNameTextField.setText(name);
     }
 
 }

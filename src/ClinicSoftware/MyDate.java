@@ -21,6 +21,12 @@ public class MyDate {
         this.date[2]=temp[0];//day
     }
 
+    public static MyDate nullDate()
+    {
+        MyDate nullDate = new MyDate("01-01-1970");
+        return nullDate;
+    }
+
     String[] getDate(Date date)
     {
         String arr[]=date.toString().split(" ");

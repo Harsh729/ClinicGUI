@@ -34,7 +34,7 @@ public class CreateLabWorkMain extends Application {
         CreateLabWorkController.obj=obj;
     }
 
-    public void setMainWindowController(MainWindowController obj) { CreateLabWorkController.mainWindowController = obj; }
+    public void setMainWindowController(MainWindowController obj) { CreateLabWorkController.setMainWindowController(obj); }
 
     public static void main(String args[])
     {

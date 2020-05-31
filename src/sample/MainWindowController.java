@@ -4,16 +4,24 @@ import ClinicSoftware.*;
 import javafx.collections.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
@@ -226,35 +234,7 @@ public class MainWindowController implements Initializable {
 
         PatientTable.getColumns().addAll(patientName,phone,age,description,money);
 
-//        patientName.setCellValueFactory(new PropertyValueFactory<Patient,String>("name"));
-//        phone.setCellValueFactory(new PropertyValueFactory<Patient,String>("phone"));
-//        age.setCellValueFactory(new PropertyValueFactory<Patient,Integer>("age"));
-//        description.setCellValueFactory(new PropertyValueFactory<Patient,String>("desc"));
-//        money.setCellValueFactory(new PropertyValueFactory<Patient,Double>("money"));
-
-        ObservableList<PatientTableWrapper> data2 = FXCollections.observableArrayList();
-
-        try{
-            File folder=new File(dir+"Records\\");
-            File[] RecordFiles=folder.listFiles();
-            ObservableList<Patient> data=FXCollections.observableArrayList();
-            for(File file: RecordFiles)
-            {
-                PatientFile patientFile =new PatientFile(file.getName().split("\\.")[0]);
-                Patient rec= patientFile.readFile();
-                if(rec!=null) {
-                    //rec.buildAppointments(userSignature);
-                    PatientTableWrapper pat = new PatientTableWrapper(rec);
-                    data.add(rec);
-                    data2.add(pat);
-                }
-            }
-           //PatientTable.setItems(data);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+        ObservableList<PatientTableWrapper> data2 = getPatientDatabase();
 
         patientName.setCellValueFactory(new PropertyValueFactory<PatientTableWrapper,String>("name"));
         phone.setCellValueFactory(new PropertyValueFactory<PatientTableWrapper,String>("phone"));
@@ -404,6 +384,9 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private TableView PatientTable;
+
+    @FXML
+    private TextField searchTextField;
 
     @FXML
     void openLabWorkTab(ActionEvent event) {
@@ -784,6 +767,96 @@ public class MainWindowController implements Initializable {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    public ObservableList search(String search, ClinicFile cf)
+    {
+        ObservableList<String> data = FXCollections.observableArrayList();
+        File folder = new File(dir+cf.getFolderName());
+        File files[] = folder.listFiles();
+        for(File file:files)
+        {
+            String fileName = file.getName().split("\\.")[0];
+            if(fileName.toLowerCase().contains(search.toLowerCase()))
+            {
+                data.add(fileName);
+            }
+        }
+        return data;
+    }
+
+    @FXML
+    public void useSearchInPatientTable()
+    {
+        String searchText = searchTextField.getText();
+        ObservableList<String> files = search(searchText,new PatientFile(""));
+        ObservableList<PatientTableWrapper> data = getPatientDatabase();
+        ObservableList<PatientTableWrapper> searched = FXCollections.observableArrayList();
+        for(String file: files)
+        {
+            int first = 0, last = data.size() + 1;
+            int mid = 1;
+            while(first <= last)
+            {
+                mid = (last+first)/2;
+                if(data.get(mid).getFileName().equals(file))
+                {
+                    searched.add(data.get(mid));
+                    break;
+                }
+                else if(data.get(mid).getFileName().compareTo(file) > 0)
+                    last = mid - 1;
+                else
+                    first = mid + 1;
+            }
+        }
+        PatientTable.getItems().clear();
+        PatientTable.setItems(searched);
+        initializeButtons();
+
+    }
+
+    public ObservableList getPatientDatabase()
+    {
+        try{
+            File folder=new File(dir+"Records\\");
+            File[] RecordFiles=folder.listFiles();
+            ObservableList<PatientTableWrapper> data=FXCollections.observableArrayList();
+            for(File file: RecordFiles)
+            {
+                PatientFile patientFile =new PatientFile(file.getName().split("\\.")[0]);
+                Patient rec= patientFile.readFile();
+                if(rec!=null) {
+                    PatientTableWrapper pat = new PatientTableWrapper(rec);
+                    data.add(pat);
+                }
+            }
+            return data;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return FXCollections.observableArrayList();
+        }
+    }
+
+    TextFlow highlight(String text, String search)
+    {
+        int start = text.indexOf(search);
+        TextFlow result = new TextFlow();
+        if(start!=-1)
+        {
+            Text beginning = new Text(text.substring(0,start));
+            Text end = new Text(text.substring(start + search.length()));
+            Text highlight = new Text(search);
+            highlight.setFill(Color.ORANGE);
+            highlight.setFont(Font.font("Helvetica", FontWeight.BOLD,12));
+            result = new TextFlow(beginning,highlight,end);
+        }
+        else
+            return highlight(text.toLowerCase(),search.toLowerCase());// will never go into infinite recursion as search will be contained by text
+        return result;
     }
 
 }

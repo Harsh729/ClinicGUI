@@ -9,6 +9,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -279,4 +284,44 @@ public class AddScheduleWindowController implements Initializable {
     {
         this.pre=pre;
     }
+
+    @FXML
+    public void search()
+    {
+        String search = searchTextField.getText();
+        searchContextMenu.getItems().clear();
+        ObservableList<String> data = obj.search(search, new PatientFile(""));
+        ObservableList<MenuItem> items = FXCollections.observableArrayList();
+
+        for(String s:data)
+        {
+            MenuItem item = new MenuItem();
+            item.setGraphic(obj.highlight(s,search));
+            EventHandler event = new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    searchTextField.setText(s);
+                }
+            };
+            item.setOnAction(event);
+            items.add(item);
+        }
+
+        searchContextMenu.getItems().addAll(items);
+        searchTextField.setContextMenu(searchContextMenu);
+        Bounds dims = searchTextField.localToScreen(searchTextField.getBoundsInLocal());
+        searchContextMenu.show(searchTextField,dims.getMinX(),dims.getMaxY());
+    }
+
+    @FXML
+    public void useSearch()
+    {
+        String fileName = searchTextField.getText();
+        int separate = fileName.lastIndexOf(" ");
+        String name = fileName.substring(0,separate);
+        String phone = fileName.substring(separate+1);
+        nameTextField.setText(name);
+        phoneTextField.setText(phone);
+    }
+
 }

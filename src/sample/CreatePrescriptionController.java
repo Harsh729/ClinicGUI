@@ -15,7 +15,6 @@ public class CreatePrescriptionController {
     public static AddScheduleWindowController obj=new AddScheduleWindowController();
     public  static MainWindowController MainWindowControllerObject;
 
-    public static MainWindowController mainWindowController;
 
     public static String name="";
 
@@ -72,13 +71,13 @@ public class CreatePrescriptionController {
     {
         String search = searchTextField.getText();
         searchContextMenu.getItems().clear();
-        ObservableList<String> data = mainWindowController.search(search, new PatientFile(""));
+        ObservableList<String> data = MainWindowControllerObject.search(search, new PatientFile(""));
         ObservableList<MenuItem> items = FXCollections.observableArrayList();
 
         for(String s:data)
         {
             MenuItem item = new MenuItem();
-            item.setGraphic(mainWindowController.highlight(s,search));
+            item.setGraphic(MainWindowControllerObject.highlight(s,search));
             EventHandler event = new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {

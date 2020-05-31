@@ -213,9 +213,14 @@ public class Appointment {
             af.deleteFile();
             this.patient.updateLatestAppointment(this);
         }
+        catch(NullPointerException e)
+        {
+            System.out.println("Null Pointer Exception in Appointment.delete()");
+        }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+
     }
 }

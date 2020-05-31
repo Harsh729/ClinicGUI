@@ -840,6 +840,8 @@ public class MainWindowController implements Initializable {
             highlight.setFont(Font.font("Helvetica", FontWeight.BOLD,12));
             result = new TextFlow(beginning,highlight,end);
         }
+        else
+            return highlight(text.toLowerCase(),search.toLowerCase());// will never go into infinite recursion as search will be contained by text
         return result;
     }
 

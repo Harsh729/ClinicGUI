@@ -92,7 +92,7 @@ public class MyDate {
 
     }
 
-    public int[] toIntegerArray(MyDate date)
+    public static int[] toIntegerArray(MyDate date)
     {
         int d[]=new int[3];
         for(int i=0;i<3;i++)

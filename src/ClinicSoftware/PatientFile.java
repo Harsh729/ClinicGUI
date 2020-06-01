@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.*;
 
 public class PatientFile extends ClinicFile {
-    private String folderName = "Records/";
+    private String folderName = "Patients/";
     private String[] header = {"Name", "Phone No.", "Age", "First Date", "Latest Date", "Description", "Money", "Heart Condition", "Allergy", "Diabetes", "Blood Pressure", "Amount Paid", "App Ctr"};
     private String fileName = "";
 

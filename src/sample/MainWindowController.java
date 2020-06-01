@@ -97,7 +97,7 @@ public class MainWindowController implements Initializable {
         LabWork lab=new LabWork();
         try {
             //LabWorkFile file2 = new LabWorkFile("Name 12-1-2019");
-            File folder=new File(dir+"Lab Work\\");
+            File folder=new File(dir+(new LabWorkFile("")).getFolderName());
             File[] LabWorkFiles=folder.listFiles();
             ObservableList<LabWork> data = FXCollections.observableArrayList();
             for(int i=0;i<LabWorkFiles.length;i++) {
@@ -140,7 +140,7 @@ public class MainWindowController implements Initializable {
         Prescription pre=new Prescription();
         try {
             //LabWorkFile file2 = new LabWorkFile("Name 12-1-2019");
-            File folder=new File(dir+"Prescriptions\\");
+            File folder=new File(dir+(new PrescriptionFile("")).getFolderName());
             File[] PrescriptionFiles=folder.listFiles();
             ObservableList<Prescription> data = FXCollections.observableArrayList();
             for(int i=0;i<PrescriptionFiles.length;i++) {
@@ -843,7 +843,7 @@ public class MainWindowController implements Initializable {
     public ObservableList getPatientDatabase()
     {
         try{
-            File folder=new File(dir+"Records\\");
+            File folder=new File(dir+(new PatientFile("")).getFolderName());
             File[] RecordFiles=folder.listFiles();
             ObservableList<PatientTableWrapper> data=FXCollections.observableArrayList();
             for(File file: RecordFiles)

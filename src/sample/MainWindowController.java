@@ -277,6 +277,7 @@ public class MainWindowController implements Initializable {
     public void initializeButtons()
     {
         DeleteLabWorkButton.setDisable(true);
+        EditLabWorkButton.setDisable(true);
         DeletePatientButton.setDisable(true);
         DeletePrescriptionButton.setDisable(true);
         DisplayPatientDetailsButton.setDisable(true);
@@ -336,6 +337,9 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private Button AddLabWorkButton;
+
+    @FXML
+    private Button EditLabWorkButton;
 
     @FXML
     private Button AddPrescriptionButton;
@@ -491,6 +495,7 @@ public class MainWindowController implements Initializable {
     {
         if(!LabWorkTable.getSelectionModel().isEmpty()){
             DeleteLabWorkButton.setDisable(false);
+            EditLabWorkButton.setDisable(false);
         }
     }
 
@@ -640,6 +645,24 @@ public class MainWindowController implements Initializable {
         obj.setFile(file);
         obj.setObj(this);
         try {
+            obj.start(new Stage());
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void editLabWork()
+    {
+        try {
+            LabWork selected = (LabWork) LabWorkTable.getSelectionModel().getSelectedItem();
+            LabWorkFile file = new LabWorkFile(selected.getFileName());
+            file.deleteFile();
+            EditLabWorkWindowMain obj = new EditLabWorkWindowMain();
+            obj.setLabWork(selected);
+            obj.setMainWindowControllerObject(this);
             obj.start(new Stage());
         }
         catch(Exception e)

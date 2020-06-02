@@ -818,7 +818,7 @@ public class MainWindowController implements Initializable {
         ObservableList<PatientTableWrapper> searched = FXCollections.observableArrayList();
         for(String file: files)
         {
-            int first = 0, last = data.size() + 1;
+            int first = 0, last = data.size();
             int mid = 1;
             while(first <= last)
             {

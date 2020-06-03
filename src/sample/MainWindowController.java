@@ -856,7 +856,7 @@ public class MainWindowController implements Initializable {
                 PatientFile patientFile =new PatientFile(file.getName().substring(0,last_dot));
                 Patient rec= patientFile.readFile();
                 if(rec!=null) {
-                    if(!rec.getFileName().equals(" ")) {
+                    if(!rec.getFileName().equals(" ") && !rec.getFileName().equals("")) {
                         PatientTableWrapper pat = new PatientTableWrapper(rec);
                         data.add(pat);
                     }

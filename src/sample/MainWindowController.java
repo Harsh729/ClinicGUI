@@ -101,7 +101,8 @@ public class MainWindowController implements Initializable {
             File[] LabWorkFiles=folder.listFiles();
             ObservableList<LabWork> data = FXCollections.observableArrayList();
             for(int i=0;i<LabWorkFiles.length;i++) {
-                LabWorkFile labFile = new LabWorkFile(LabWorkFiles[i].getName().split("\\.")[0]);
+                int last_dot = LabWorkFiles[i].getName().lastIndexOf(".");
+                LabWorkFile labFile = new LabWorkFile(LabWorkFiles[i].getName().substring(0,last_dot));
                 lab= labFile.readFile();
                 data.add(lab);
 
@@ -144,7 +145,8 @@ public class MainWindowController implements Initializable {
             File[] PrescriptionFiles=folder.listFiles();
             ObservableList<Prescription> data = FXCollections.observableArrayList();
             for(int i=0;i<PrescriptionFiles.length;i++) {
-                PrescriptionFile prescriptionFile = new PrescriptionFile(PrescriptionFiles[i].getName().split("\\.")[0]);
+                int last_dot = PrescriptionFiles[i].getName().lastIndexOf(".");
+                PrescriptionFile prescriptionFile = new PrescriptionFile(PrescriptionFiles[i].getName().substring(0,last_dot));
                 pre=prescriptionFile.readFile();
                 data.add(pre);
 
@@ -774,7 +776,8 @@ public class MainWindowController implements Initializable {
         File[] files = folder.listFiles();
         for(File file:files)
         {
-            LabWorkFile lf = new LabWorkFile(file.getName().split("\\.")[0]);
+            int last_dot = file.getName().lastIndexOf(".");
+            LabWorkFile lf = new LabWorkFile(file.getName().substring(0,last_dot));
             LabWork lb = lf.readFile();
             if(lb!=null)//avoiding NullPointerException
             {
@@ -800,7 +803,8 @@ public class MainWindowController implements Initializable {
         File files[] = folder.listFiles();
         for(File file:files)
         {
-            String fileName = file.getName().split("\\.")[0];
+            int last_dot = file.getName().lastIndexOf(".");
+            String fileName = file.getName().substring(0,last_dot);
             if(fileName.toLowerCase().contains(search.toLowerCase()))
             {
                 data.add(fileName);
@@ -848,11 +852,14 @@ public class MainWindowController implements Initializable {
             ObservableList<PatientTableWrapper> data=FXCollections.observableArrayList();
             for(File file: RecordFiles)
             {
-                PatientFile patientFile =new PatientFile(file.getName().split("\\.")[0]);
+                int last_dot = file.getName().lastIndexOf(".");
+                PatientFile patientFile =new PatientFile(file.getName().substring(0,last_dot));
                 Patient rec= patientFile.readFile();
                 if(rec!=null) {
-                    PatientTableWrapper pat = new PatientTableWrapper(rec);
-                    data.add(pat);
+                    if(!rec.getFileName().equals(" ")) {
+                        PatientTableWrapper pat = new PatientTableWrapper(rec);
+                        data.add(pat);
+                    }
                 }
             }
             return data;

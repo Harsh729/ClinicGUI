@@ -18,9 +18,12 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.File;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -726,6 +729,24 @@ public class MainWindowController implements Initializable {
     @FXML
     void setScheduleDate(){
         MyDate date=new MyDate(ScheduleDatePicker.getValue().toString());
+        String pattern = "dd-MM-yyyy";
+        ScheduleDatePicker.setConverter(new StringConverter<LocalDate>() {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+            @Override
+            public String toString(LocalDate object) {
+                if(object!=null)
+                {
+                    return formatter.format(object);
+                }
+                else
+                    return "";
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                return null;
+            }
+        });
         String mydate=date.toString();
         System.out.println(mydate);
         //ScheduleTable.getColumns().clear();

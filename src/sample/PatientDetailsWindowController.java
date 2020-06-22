@@ -4,6 +4,7 @@ import ClinicSoftware.Patient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -29,16 +30,16 @@ public class PatientDetailsWindowController {
     private Button OKButton;
 
     @FXML
-    private TextField HeartConditionTextField = new TextField();
+    private CheckBox HeartConditionCheckBox = new CheckBox();
 
     @FXML
-    private TextField BloodPressureTextField = new TextField();
+    private CheckBox BloodPressureCheckBox = new CheckBox();
 
     @FXML
-    private TextField AllergyTextField = new TextField();
+    private CheckBox AllergyCheckBox = new CheckBox();
 
     @FXML
-    private TextField DiabetesTextField = new TextField();
+    private CheckBox DiabetesCheckBox = new CheckBox();
 
     @FXML
     private TextField FirstAppointmentTextField = new TextField();
@@ -61,10 +62,10 @@ public class PatientDetailsWindowController {
         PhoneTextField.setText(patient.getPhone());
         AgeTextField.setText(String.valueOf(patient.getAge()));
         DescriptionTextArea.setText(patient.getDesc());
-        HeartConditionTextField.setText(String.valueOf(patient.getHeartCondition()));
-        AllergyTextField.setText(String.valueOf(patient.getAllergy()));
-        BloodPressureTextField.setText(String.valueOf(patient.getBloodPressure()));
-        DiabetesTextField.setText(String.valueOf(patient.getDiabetes()));
+        HeartConditionCheckBox.setSelected(patient.getHeartCondition());
+        AllergyCheckBox.setSelected(patient.getAllergy());
+        BloodPressureCheckBox.setSelected(patient.getBloodPressure());
+        DiabetesCheckBox.setSelected(patient.getBloodPressure());
         FirstAppointmentTextField.setText(patient.getDateFromAppointment(patient.getFirstAppointmentFile()));
         LatestAppointmentTextField.setText(patient.getDateFromAppointment(patient.getLatestAppointmentFile()));
         AmountPaidTextField.setText(String.valueOf(patient.getPaid()));

@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -37,10 +38,10 @@
       <Label layoutX="47.0" layoutY="288.0" text="Blood Pressure:" />
       <Label layoutX="243.0" layoutY="255.0" text="Allergy:" />
       <Label layoutX="243.0" layoutY="288.0" text="Diabetes:" />
-      <TextField fx:id="HeartConditionTextField" editable="false" layoutX="142.0" layoutY="251.0" prefHeight="25.0" prefWidth="75.0" />
-      <TextField fx:id="BloodPressureTextField" editable="false" layoutX="135.0" layoutY="284.0" prefHeight="25.0" prefWidth="75.0" />
-      <TextField fx:id="AllergyTextField" editable="false" layoutX="292.0" layoutY="251.0" prefHeight="25.0" prefWidth="75.0" />
-      <TextField fx:id="DiabetesTextField" editable="false" layoutX="300.0" layoutY="284.0" prefHeight="25.0" prefWidth="75.0" />
+      <CheckBox fx:id="HeartConditionCheckBox" disable="true" layoutX="138.0" layoutY="255.0" mnemonicParsing="false" />
+      <CheckBox fx:id="AllergyCheckBox" disable="true" layoutX="287.0" layoutY="255.0" mnemonicParsing="false" />
+      <CheckBox fx:id="BloodPressureCheckBox" disable="true" layoutX="133.0" layoutY="288.0" mnemonicParsing="false" />
+      <CheckBox fx:id="DiabetesCheckBox" disable="true" layoutX="295.0" layoutY="288.0" mnemonicParsing="false" />
       <Label layoutX="50.0" layoutY="331.0" text="First Appointment:" />
       <Label layoutX="48.0" layoutY="363.0" text="Latest Appointment:" />
       <TextField fx:id="FirstAppointmentTextField" editable="false" layoutX="154.0" layoutY="327.0" />

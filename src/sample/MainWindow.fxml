@@ -169,6 +169,11 @@
                                  <children>
                                     <HBox alignment="CENTER_RIGHT" prefHeight="63.0" prefWidth="672.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
+                                          <Button fx:id="EditPatientButton" mnemonicParsing="false" onAction="#openPatientEditWindow" prefHeight="42.0" prefWidth="100.0" text="Edit">
+                                             <font>
+                                                <Font name="System Bold" size="21.0" />
+                                             </font>
+                                          </Button>
                                           <Button fx:id="DeletePatientButton" layoutX="570.0" mnemonicParsing="false" onAction="#deletePatient" prefHeight="42.0" prefWidth="100.0" text="Delete">
                                              <HBox.margin>
                                                 <Insets />

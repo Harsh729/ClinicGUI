@@ -283,6 +283,7 @@ public class MainWindowController implements Initializable {
     {
         DeleteLabWorkButton.setDisable(true);
         EditLabWorkButton.setDisable(true);
+        EditPatientButton.setDisable(true);
         DeletePatientButton.setDisable(true);
         DeletePrescriptionButton.setDisable(true);
         DisplayPatientDetailsButton.setDisable(true);
@@ -345,6 +346,9 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private Button EditLabWorkButton;
+
+    @FXML
+    private Button EditPatientButton;
 
     @FXML
     private Button AddPrescriptionButton;
@@ -483,6 +487,7 @@ public class MainWindowController implements Initializable {
         if(!PatientTable.getSelectionModel().isEmpty()){
             DeletePatientButton.setDisable(false);
             DisplayPatientDetailsButton.setDisable(false);
+            EditPatientButton.setDisable(false);
         }
     }
 
@@ -615,25 +620,55 @@ public class MainWindowController implements Initializable {
         }
     }
 
-    @FXML
-    public void openPatientDetailsWindow()
+    public Patient getSelectedPatient()
     {
-        PatientDetailsWindowMain obj = new PatientDetailsWindowMain();
         PatientTableWrapper wrap = (PatientTableWrapper)PatientTable.getSelectionModel().getSelectedItem();
         PatientFile file = new PatientFile(wrap.getFileName());
         try {
             Patient patient = file.readFile();
-            obj.setPatient(patient);
-            Stage stage = new Stage();
-            obj.start(stage);
+            return patient;
         }
         catch(Exception e)
         {
-            System.out.print("Exception at openPatientWindow:");
+            System.out.println("Exception at getSelectedPatient(): readFile");
             e.printStackTrace();
+        }
+        return null;
+    }
 
+    @FXML
+    public void openPatientDetailsWindow()
+    {
+        PatientDetailsWindowMain obj = new PatientDetailsWindowMain();
+        Patient patient = getSelectedPatient();
+        obj.setPatient(patient);
+        try {
+            obj.start(new Stage());
+        }
+        catch(Exception e)
+        {
+            System.out.println("Exception at openPatientDetailsWindow:");
+            e.printStackTrace();
         }
     }
+
+    @FXML
+    public void openPatientEditWindow()
+    {
+        PatientEditWindowMain obj = new PatientEditWindowMain();
+        Patient patient = getSelectedPatient();
+        obj.setPatient(patient);
+        obj.setMainWindowController(this);
+        try {
+            obj.start(new Stage());
+        }
+        catch(Exception e)
+        {
+            System.out.println("Exception at openPatientEditWindow:");
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     void createLabWork(){
         CreateLabWorkMain obj=new CreateLabWorkMain();
